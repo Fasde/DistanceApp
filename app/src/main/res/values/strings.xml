@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">DIstanceApp</string>
+    <string name="app_name">DistanceApp</string>
+    <string name="display_name">Spielort-Distanz</string>
 </resources>
