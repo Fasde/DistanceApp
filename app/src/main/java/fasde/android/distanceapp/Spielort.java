@@ -37,27 +37,13 @@ public class Spielort {
 
     public static List<Spielort> gottaListEmAll() {
         List<Spielort> allPlaces = new ArrayList<>();
-        for (Spielort ort : emslandNord()) {
-            allPlaces.add(ort);
-        }
-        for (Spielort ort : emslandMitte()) {
-            allPlaces.add(ort);
-        }
-        for (Spielort ort : emslandSued()) {
-            allPlaces.add(ort);
-        }
-        for (Spielort ort : grafschaft()) {
-            allPlaces.add(ort);
-        }
-        for (Spielort ort : osnabrück()) {
-            allPlaces.add(ort);
-        }
-        for (Spielort ort : ostfriesland()) {
-            allPlaces.add(ort);
-        }
-        for (Spielort ort : cloppenburg()) {
-            allPlaces.add(ort);
-        }
+        allPlaces.addAll(emslandNord());
+        allPlaces.addAll(emslandMitte());
+        allPlaces.addAll(emslandSued());
+        allPlaces.addAll(grafschaft());
+        allPlaces.addAll(cloppenburg());
+        allPlaces.addAll(osnabrück());
+        allPlaces.addAll(ostfriesland());
         return allPlaces;
     }
 

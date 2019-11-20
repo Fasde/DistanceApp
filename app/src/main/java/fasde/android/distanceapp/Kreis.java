@@ -2,9 +2,9 @@ package fasde.android.distanceapp;
 
 public enum Kreis {
 
-    EL_NORD("Emsland-Nord"),
-    EL_MITTE("Emsland-Mitte"),
-    EL_SUED("Emsland-Süd"),
+    EL_NORD("EL-Nord"),
+    EL_MITTE("EL-Mitte"),
+    EL_SUED("EL-Süd"),
     GRAFSCHAFT("Grafschaft"),
     OSTFRIESLAND("Ostfriesland"),
     CLP("Cloppenburg"),
