@@ -25,10 +25,10 @@ public class SpielortDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         spielortA = intent.getStringArrayExtra("spielort");
 
-        ort.setText("\t" +spielortA[0]);
-        distanz.setText("Distanz: " + spielortA[1] + "km pro Strecke");
-        kosten.setText("Fahrtkosten: " + spielortA[2] + "€");
-        kreis.setText("Kreis: " + spielortA[3]);
-        adresse.setText("Adresse: Work in Progress");
+        ort.setText("\t" + spielortA[0]);
+        distanz.setText("Distanz: \n\t" + spielortA[1] + "km pro Strecke");
+        kosten.setText("Fahrtkosten: \n\t" + spielortA[2] + "€");
+        kreis.setText("Kreis: \n\t" + spielortA[3]);
+        adresse.setText("Adresse: \n\t" + spielortA[4]);
     }
 }
