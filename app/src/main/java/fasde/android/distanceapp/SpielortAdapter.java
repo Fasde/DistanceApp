@@ -72,7 +72,7 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
         spielort.setText("\t" + ort.getSpielort());
 
         TextView km = listItem.findViewById(R.id.textView_km);
-        km.setText(Integer.toString(ort.getDistanz()) + "km");
+        km.setText(ort.getDistanz() + "km");
 
         TextView kosten = listItem.findViewById(R.id.textView_kosten);
         kosten.setText(ort.getKosten().toString() + "€");

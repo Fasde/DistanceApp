@@ -40,10 +40,10 @@ public class Spielort {
         allPlaces.addAll(emslandNord());
         allPlaces.addAll(emslandMitte());
         allPlaces.addAll(emslandSued());
-        allPlaces.addAll(grafschaft());
-        allPlaces.addAll(cloppenburg());
-        allPlaces.addAll(osnabrück());
-        allPlaces.addAll(ostfriesland());
+        // allPlaces.addAll(grafschaft());
+        // allPlaces.addAll(cloppenburg());
+        // allPlaces.addAll(osnabrück());
+        // allPlaces.addAll(ostfriesland());
         return allPlaces;
     }
 
@@ -177,7 +177,35 @@ public class Spielort {
 
     public static List<Spielort> grafschaft() {
         List<Spielort> grafschaft = new ArrayList<>();
-        grafschaft.add(new Spielort("Nordhorn (WE)", 50, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Nordhorn", 50, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Wielen", 40, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Bookholt", 47, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Hohenkörben", 37, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Neuenhaus", 42, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Schüttorf", 57, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Hilten-Lemke", 45, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Füchtenfeld", 31, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Ringe-Neugnadenfeld", 40, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Hesepe (Grafschaft)", 46, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Wilsum", 45, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Emlichheim", 39, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Bad Bentheim", 71, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Haftenkamp", 50, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Brandlecht-Hestrup", 63, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Quendorf", 63, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Esche",41, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Laarwald", 48, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Hoogstede", 35, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Klausheide", 40, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Uelsen", 49, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Lage", 56, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Suddendorf-Samern", 56, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Lohne (Grafschaft)", 38, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Veldhausen", 40, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Wietmarschen", 33, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Georgsdorf", 31, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Gildehaus", 69, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Frensdorf", 57, Kreis.GRAFSCHAFT));
         return grafschaft;
     }
 
@@ -199,5 +227,9 @@ public class Spielort {
     @Override
     public String toString() {
         return this.getSpielort() + "\n" + this.getKreis().getName() + "\t\t--\t\t" + this.getDistanz() + "km" + "\t\t--\t\t" + this.getKosten() + "€";
+    }
+
+    public String[] toStringArray(){
+        return new String[]{this.getSpielort(), Integer.toString(this.getDistanz()), this.kosten.toString(), this.getKreis().getName()};
     }
 }

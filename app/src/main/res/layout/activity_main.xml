@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="fasde.android.distanceapp.MainActivity">
 
     <EditText android:id="@+id/inputSearch"
@@ -12,7 +13,7 @@
         android:inputType="textVisiblePassword"/>
 
     <ListView
-        android:id="@+id/spielort_list"
+        android:id="@+id/list"
         android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
