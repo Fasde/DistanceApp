@@ -13,6 +13,7 @@ public class Spielort {
     private Kreis kreis;
     private String adresse;
 
+    @Deprecated
     public Spielort(String spielort, int distanz, Kreis kreis) {
         this.spielort = spielort;
         this.distanz = distanz;
@@ -243,6 +244,7 @@ public class Spielort {
     }
 
     public String[] toStringArray() {
-        return new String[]{this.getSpielort(), Integer.toString(this.getDistanz()), this.kosten.toString(), this.getKreis().getName(), this.getAdresse()};
+        String adress[] = this.getAdresse().split(",");
+        return new String[]{this.getSpielort(), Integer.toString(this.getDistanz()), this.kosten.toString(), this.getKreis().getName(), adress[0], adress[1]};
     }
 }

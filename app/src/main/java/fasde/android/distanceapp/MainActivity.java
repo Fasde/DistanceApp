@@ -1,6 +1,5 @@
 package fasde.android.distanceapp;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override

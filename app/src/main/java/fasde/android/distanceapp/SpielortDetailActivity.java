@@ -26,9 +26,9 @@ public class SpielortDetailActivity extends AppCompatActivity {
         spielortA = intent.getStringArrayExtra("spielort");
 
         ort.setText("\t" + spielortA[0]);
-        distanz.setText("Distanz: \n\t" + spielortA[1] + "km pro Strecke");
-        kosten.setText("Fahrtkosten: \n\t" + spielortA[2] + "€");
-        kreis.setText("Kreis: \n\t" + spielortA[3]);
-        adresse.setText("Adresse: \n\t" + spielortA[4]);
+        distanz.setText("Distanz: \n\t\t"  + spielortA[1] + "km pro Strecke");
+        kosten.setText("Fahrtkosten: \n\t\t " + spielortA[2] + "€");
+        kreis.setText("Kreis: \n\t\t " + spielortA[3]);
+        adresse.setText("Adresse: \n\t\t " + spielortA[4] + "\n\t\t" + spielortA[5]);
     }
 }

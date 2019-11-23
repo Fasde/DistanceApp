@@ -12,7 +12,7 @@ public enum Kreis {
 
     String name;
 
-     Kreis(String name) {
+    Kreis(String name) {
         this.name = name;
     }
 
