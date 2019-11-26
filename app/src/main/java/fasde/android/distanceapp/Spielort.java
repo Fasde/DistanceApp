@@ -14,14 +14,14 @@ public class Spielort {
     private String adresse;
 
     @Deprecated
-    public Spielort(String spielort, int distanz, Kreis kreis) {
+    private Spielort(String spielort, int distanz, Kreis kreis) {
         this.spielort = spielort;
         this.distanz = distanz;
         this.kosten = new BigDecimal(distanz * 0.30 * 2).setScale(2, RoundingMode.HALF_DOWN);
         this.kreis = kreis;
     }
 
-    public Spielort(String spielort, int distanz, Kreis kreis, String adresse) {
+    private Spielort(String spielort, int distanz, Kreis kreis, String adresse) {
         this.spielort = spielort;
         this.distanz = distanz;
         this.kosten = new BigDecimal(distanz * 0.30 * 2).setScale(2, RoundingMode.HALF_DOWN);
@@ -189,6 +189,7 @@ public class Spielort {
         return emsLandSued;
     }
 
+    @Deprecated
     public static List<Spielort> grafschaft() {
         List<Spielort> grafschaft = new ArrayList<>();
         grafschaft.add(new Spielort("Nordhorn", 50, Kreis.GRAFSCHAFT));
@@ -223,16 +224,19 @@ public class Spielort {
         return grafschaft;
     }
 
+    @Deprecated
     public static List<Spielort> ostfriesland() {
         List<Spielort> ostfriesland = new ArrayList<>();
         return ostfriesland;
     }
 
+    @Deprecated
     public static List<Spielort> cloppenburg() {
         List<Spielort> cloppenburg = new ArrayList<>();
         return cloppenburg;
     }
 
+    @Deprecated
     public static List<Spielort> osnabrück() {
         List<Spielort> osna = new ArrayList<>();
         return osna;
