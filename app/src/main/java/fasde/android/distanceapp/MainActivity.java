@@ -12,7 +12,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -36,20 +35,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        String variante = intent.getStringExtra("variante");
+
         listView = findViewById(R.id.list);
         editText = findViewById(R.id.inputSearch);
 
-        List<String> setup = new ArrayList<>();
         ArrayList<Spielort> spielorts = new ArrayList<>();
 
         Map<String, Spielort> vereine = new TreeMap<>();
 
-        for (Spielort ort : Spielort.gottaListEmAll()) {
-            vereine.put(ort.getSpielort(), ort);
+        if (variante.equals("Alle Kreise")) {
+            for (Spielort ort : Spielort.gottaListEmAll()) {
+                vereine.put(ort.getSpielort(), ort);
+            }
+        } else if (variante.equals("Emsland-Gesamt")) {
+            for (Spielort ort : Spielort.emslandMitte()) {
+                vereine.put(ort.getSpielort(), ort);
+            }
+            for (Spielort ort : Spielort.emslandNord()) {
+                vereine.put(ort.getSpielort(), ort);
+            }
+        } else if (variante.equals("Emsland-Nord")) {
+            for (Spielort ort : Spielort.emslandNord()) {
+                vereine.put(ort.getSpielort(), ort);
+            }
+        } else if (variante.equals("Emsland-Mitte")) {
+            for (Spielort ort : Spielort.emslandMitte()) {
+                vereine.put(ort.getSpielort(), ort);
+            }
+        } else if (variante.equals("Emsland-Süd")) {
+            for (Spielort ort : Spielort.emslandSued()) {
+                vereine.put(ort.getSpielort(), ort);
+            }
         }
 
         for (Map.Entry<String, Spielort> entry : vereine.entrySet()) {
-            setup.add(entry.getValue().toString());
             spielorts.add(entry.getValue());
         }
 
