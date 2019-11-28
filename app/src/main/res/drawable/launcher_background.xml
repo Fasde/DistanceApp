@@ -4,8 +4,9 @@
     <item android:drawable="@color/colorPrimary" />
 
     <item>
-        <bitmap android:src="@drawable/deposit"
-            android:gravity="center" />
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/deposit" />
 
     </item>
 
