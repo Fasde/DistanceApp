@@ -5,6 +5,9 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * POJO for a Spielort.
+ */
 public class Spielort {
 
     private String spielort;

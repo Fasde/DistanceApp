@@ -16,7 +16,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-
+/**
+ * Creates a Activity about a ListView of Spielorts.
+ */
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;

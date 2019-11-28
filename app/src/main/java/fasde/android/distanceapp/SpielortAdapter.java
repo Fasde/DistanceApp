@@ -18,6 +18,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Custom Adapter for a ListView of Spielorts.
+ */
 public class SpielortAdapter extends ArrayAdapter<Spielort> {
 
     private Context context;

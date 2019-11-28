@@ -7,10 +7,18 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * DetailView that shows Details about a specific Spielort
+ */
 public class SpielortDetailActivity extends AppCompatActivity {
 
     String[] spielortA;
 
+    /**
+     * Creates a view, that shoes details about a specific Spielort.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +34,7 @@ public class SpielortDetailActivity extends AppCompatActivity {
         spielortA = intent.getStringArrayExtra("spielort");
 
         ort.setText("\t" + spielortA[0]);
-        distanz.setText("Distanz: \n\t\t"  + spielortA[1] + "km pro Strecke");
+        distanz.setText("Distanz: \n\t\t" + spielortA[1] + "km pro Strecke");
         kosten.setText("Fahrtkosten: \n\t\t " + spielortA[2] + "€");
         kreis.setText("Kreis: \n\t\t " + spielortA[3]);
         adresse.setText("Adresse: \n\t\t " + spielortA[4] + "\n\t\t" + spielortA[5]);
