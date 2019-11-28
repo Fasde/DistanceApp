@@ -45,29 +45,58 @@ public class MainActivity extends AppCompatActivity {
 
         Map<String, Spielort> vereine = new TreeMap<>();
 
-        if (variante.equals("Alle Kreise")) {
-            for (Spielort ort : Spielort.gottaListEmAll()) {
+        switch (variante){
+            case "Alle Kreise":
+                for (Spielort ort : Spielort.gottaListEmAll()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Emsland-Gesamt":
+                for (Spielort ort : Spielort.emslandMitte()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                for (Spielort ort : Spielort.emslandNord()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                for (Spielort ort : Spielort.emslandSued()){
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Emsland-Nord":
+                for (Spielort ort : Spielort.emslandNord()) {
                 vereine.put(ort.getSpielort(), ort);
             }
-        } else if (variante.equals("Emsland-Gesamt")) {
-            for (Spielort ort : Spielort.emslandMitte()) {
-                vereine.put(ort.getSpielort(), ort);
-            }
-            for (Spielort ort : Spielort.emslandNord()) {
-                vereine.put(ort.getSpielort(), ort);
-            }
-        } else if (variante.equals("Emsland-Nord")) {
-            for (Spielort ort : Spielort.emslandNord()) {
-                vereine.put(ort.getSpielort(), ort);
-            }
-        } else if (variante.equals("Emsland-Mitte")) {
-            for (Spielort ort : Spielort.emslandMitte()) {
-                vereine.put(ort.getSpielort(), ort);
-            }
-        } else if (variante.equals("Emsland-Süd")) {
-            for (Spielort ort : Spielort.emslandSued()) {
-                vereine.put(ort.getSpielort(), ort);
-            }
+                break;
+            case "Emsland-Mitte":
+                for (Spielort ort : Spielort.emslandMitte()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Emsland-Süd":
+                for (Spielort ort : Spielort.emslandSued()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Grafschaft":
+                for (Spielort ort : Spielort.grafschaft()){
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Cloppenburg":
+                for (Spielort ort : Spielort.cloppenburg()){
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Ostfriesland":
+                for (Spielort ort : Spielort.ostfriesland()){
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Osnabrück":
+                for (Spielort ort : Spielort.osnabrück()){
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
         }
 
         for (Map.Entry<String, Spielort> entry : vereine.entrySet()) {

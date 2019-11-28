@@ -16,14 +16,6 @@ public class Spielort {
     private Kreis kreis;
     private String adresse;
 
-    @Deprecated
-    private Spielort(String spielort, int distanz, Kreis kreis) {
-        this.spielort = spielort;
-        this.distanz = distanz;
-        this.kosten = new BigDecimal(distanz * 0.30 * 2).setScale(2, RoundingMode.HALF_DOWN);
-        this.kreis = kreis;
-    }
-
     private Spielort(String spielort, int distanz, Kreis kreis, String adresse) {
         this.spielort = spielort;
         this.distanz = distanz;
@@ -57,7 +49,7 @@ public class Spielort {
         allPlaces.addAll(emslandNord());
         allPlaces.addAll(emslandMitte());
         allPlaces.addAll(emslandSued());
-        // allPlaces.addAll(grafschaft());
+        allPlaces.addAll(grafschaft());
         // allPlaces.addAll(cloppenburg());
         // allPlaces.addAll(osnabrück());
         // allPlaces.addAll(ostfriesland());
@@ -192,54 +184,58 @@ public class Spielort {
         return emsLandSued;
     }
 
-    @Deprecated
     public static List<Spielort> grafschaft() {
         List<Spielort> grafschaft = new ArrayList<>();
-        grafschaft.add(new Spielort("Nordhorn", 50, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Wielen", 40, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Bookholt", 47, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Hohenkörben", 37, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Neuenhaus", 42, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Schüttorf", 57, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Hilten-Lemke", 45, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Füchtenfeld", 31, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Ringe-Neugnadenfeld", 40, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Hesepe (Grafschaft)", 46, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Wilsum", 45, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Emlichheim", 39, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Bad Bentheim", 71, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Haftenkamp", 50, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Brandlecht-Hestrup", 63, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Quendorf", 63, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Esche", 41, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Laarwald", 48, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Hoogstede", 35, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Klausheide", 40, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Uelsen", 49, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Lage", 56, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Suddendorf-Samern", 56, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Lohne (Grafschaft)", 38, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Veldhausen", 40, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Wietmarschen", 33, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Georgsdorf", 31, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Gildehaus", 69, Kreis.GRAFSCHAFT));
-        grafschaft.add(new Spielort("Frensdorf", 57, Kreis.GRAFSCHAFT));
+        grafschaft.add(new Spielort("Nordhorn (AP)", 50, Kreis.GRAFSCHAFT, "48529 Nordhorn, Westfalenstr. 28"));
+        grafschaft.add(new Spielort("Nordhorn (Blanke)", 50, Kreis.GRAFSCHAFT, "48529 Nordhorn, Westfalenstr. 28"));
+        grafschaft.add(new Spielort("Nordhorn (Sparta)", 50, Kreis.GRAFSCHAFT, "48527 Nordhorn, Querstr. 5"));
+        grafschaft.add(new Spielort("Nordhorn (Alemannia)", 50, Kreis.GRAFSCHAFT, "48529 Nordhorn, Heideweg 18"));
+        grafschaft.add(new Spielort("Nordhorn (Eintracht)", 50, Kreis.GRAFSCHAFT, "48529 Nordhorn, Heideweg 18"));
+        grafschaft.add(new Spielort("Nordhorn (Vorwärts)", 50, Kreis.GRAFSCHAFT, "48531 Nordhorn, Immenweg 93"));
+        grafschaft.add(new Spielort("Nordhorn (WE)", 50, Kreis.GRAFSCHAFT, "48527 Nordhorn, Ootmarsumer Weg 155"));
+        grafschaft.add(new Spielort("Wielen", 40, Kreis.GRAFSCHAFT, "49847 Wielen, Am Sportplatz 4"));
+        grafschaft.add(new Spielort("Bookholt", 47, Kreis.GRAFSCHAFT, "48527 Nordhorn, Berglandstr. 10"));
+        grafschaft.add(new Spielort("Hohenkörben", 37, Kreis.GRAFSCHAFT, "49828 Osterwald, Schulstr. 37"));
+        grafschaft.add(new Spielort("Neuenhaus (Borussia)", 42, Kreis.GRAFSCHAFT, "49828 Neuenhaus, Prinzenstr. 50"));
+        grafschaft.add(new Spielort("Schüttorf (FC 09)", 57, Kreis.GRAFSCHAFT, "48465 Schüttorf, Salzberger Str. 80"));
+        grafschaft.add(new Spielort("Schüttorf (SC)", 57, Kreis.GRAFSCHAFT, "48465 Schüttorf, Jahnstr. 3"));
+        grafschaft.add(new Spielort("Hilten-Lemke", 45, Kreis.GRAFSCHAFT, "49828 Neuenhaus, Uelsener Str, 63"));
+        grafschaft.add(new Spielort("Füchtenfeld", 31, Kreis.GRAFSCHAFT, "49835 Wietmarschen, Berliner Str. 8"));
+        grafschaft.add(new Spielort("Ringe-Neugnadenfeld", 40, Kreis.GRAFSCHAFT, "49824 Ringe, Emlichheimer Str. 51"));
+        grafschaft.add(new Spielort("Hesepe (Grafschaft)", 46, Kreis.GRAFSCHAFT, "48531 Nordhorn, Dorfkrugstr. 10"));
+        grafschaft.add(new Spielort("Wilsum", 45, Kreis.GRAFSCHAFT, "49849 Wilsum, Echtelerstr. 8"));
+        grafschaft.add(new Spielort("Emlichheim", 39, Kreis.GRAFSCHAFT, "49824 Emlichheim, Berliner Str. 50"));
+        grafschaft.add(new Spielort("Bad Bentheim (SV)", 71, Kreis.GRAFSCHAFT, "48455 Bad Bentheim, Gutenbergstr. 6"));
+        grafschaft.add(new Spielort("Bad Bentheim (SG)", 71, Kreis.GRAFSCHAFT, "48455 Bad Bentheim, Brookdiek 2"));
+        grafschaft.add(new Spielort("Haftenkamp", 50, Kreis.GRAFSCHAFT, "49843 Gölenkamp, Uelsener Str. 22"));
+        grafschaft.add(new Spielort("Brandlecht-Hestrup", 63, Kreis.GRAFSCHAFT, "48531 Nordhorn, Schüttorfer Str. 16"));
+        grafschaft.add(new Spielort("Quendorf", 63, Kreis.GRAFSCHAFT, "48465 Quendorf, Schulstr. 13"));
+        grafschaft.add(new Spielort("Esche", 41, Kreis.GRAFSCHAFT, "49828 Esche, Hauptstr. 2"));
+        grafschaft.add(new Spielort("Laarwald", 48, Kreis.GRAFSCHAFT, "49824 Laar, Coevordener Str."));
+        grafschaft.add(new Spielort("Hoogstede", 35, Kreis.GRAFSCHAFT, "49846 Hoogstede, Bathorner Diek 10"));
+        grafschaft.add(new Spielort("Klausheide", 40, Kreis.GRAFSCHAFT, "48531 Nordhorn, Heideschulstr. 3"));
+        grafschaft.add(new Spielort("Uelsen", 49, Kreis.GRAFSCHAFT, "49843 Uelsen, Zum Waldbad 8"));
+        grafschaft.add(new Spielort("Lage", 56, Kreis.GRAFSCHAFT, "49828 Lage, Am Sportplatz 2"));
+        grafschaft.add(new Spielort("Suddendorf-Samern", 56, Kreis.GRAFSCHAFT, "48465 Schüttorf, Schützenstr. 1"));
+        grafschaft.add(new Spielort("Lohne (Grafschaft)", 38, Kreis.GRAFSCHAFT, "49835 Wietmarschen, Jahnstr. 2"));
+        grafschaft.add(new Spielort("Veldhausen", 40, Kreis.GRAFSCHAFT, "49828 Neuenhaus, Lingener Str. 28"));
+        grafschaft.add(new Spielort("Wietmarschen", 33, Kreis.GRAFSCHAFT, "49835 Wietmarschen, Im Alten Dorf 2"));
+        grafschaft.add(new Spielort("Georgsdorf", 31, Kreis.GRAFSCHAFT, "49828 Georgsdorf, Finkenstr. 20"));
+        grafschaft.add(new Spielort("Gildehaus", 69, Kreis.GRAFSCHAFT, "48455 Bad Bentheim, Romberg 37"));
+        grafschaft.add(new Spielort("Frensdorf", 57, Kreis.GRAFSCHAFT, "48527 Nordhorn, Resum 58"));
         return grafschaft;
     }
 
-    @Deprecated
     public static List<Spielort> ostfriesland() {
         List<Spielort> ostfriesland = new ArrayList<>();
         return ostfriesland;
     }
 
-    @Deprecated
     public static List<Spielort> cloppenburg() {
         List<Spielort> cloppenburg = new ArrayList<>();
         return cloppenburg;
     }
 
-    @Deprecated
     public static List<Spielort> osnabrück() {
         List<Spielort> osna = new ArrayList<>();
         return osna;

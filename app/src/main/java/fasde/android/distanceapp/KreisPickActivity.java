@@ -39,6 +39,10 @@ public class KreisPickActivity extends AppCompatActivity {
         picks.add("Emsland-Nord");
         picks.add("Emsland-Mitte");
         picks.add("Emsland-Süd");
+        picks.add("Grafschaft");
+        picks.add("Cloppenburg");
+        picks.add("Ostfriesland");
+        picks.add("Osnabrück");
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, picks);
         listView.setAdapter(arrayAdapter);
