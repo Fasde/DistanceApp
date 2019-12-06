@@ -1,4 +1,4 @@
-package fasde.android.distanceapp;
+package fasde.android.distanceapp.Types;
 
 public enum Kreis {
 
@@ -18,5 +18,14 @@ public enum Kreis {
 
     public String getName() {
         return name;
+    }
+
+    public static Kreis getForName(String kreisName){
+        for(Kreis kreis : Kreis.values()){
+            if(kreis.getName().equals(kreisName)){
+                return kreis;
+            }
+        }
+        return null;
     }
 }

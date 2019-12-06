@@ -1,4 +1,4 @@
-package fasde.android.distanceapp;
+package fasde.android.distanceapp.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fasde.android.distanceapp.DataBase.SaveData;
+import fasde.android.distanceapp.R;
+import fasde.android.distanceapp.Types.Kreis;
 
 /**
  * List of picks, to pick the Kreis of Spielorts.
@@ -35,14 +39,9 @@ public class KreisPickActivity extends AppCompatActivity {
 
         List<String> picks = new ArrayList<>();
         picks.add("Alle Kreise");
-        picks.add("Emsland-Gesamt");
-        picks.add("Emsland-Nord");
-        picks.add("Emsland-Mitte");
-        picks.add("Emsland-Süd");
-        picks.add("Grafschaft");
-        picks.add("Cloppenburg");
-        picks.add("Ostfriesland");
-        picks.add("Osnabrück");
+        for(Kreis kreis : SaveData.listAllKreise()){
+            picks.add(kreis.getName());
+        }
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, picks);
         listView.setAdapter(arrayAdapter);
@@ -50,8 +49,7 @@ public class KreisPickActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent openList = new Intent(KreisPickActivity.this, MainActivity.class);
-                openList.putExtra("variante", (String) listView.getItemAtPosition(position));
+                Intent openList = new Intent(KreisPickActivity.this, MainActivity.class).putExtra("variante", (String) listView.getItemAtPosition(position));
                 startActivity(openList);
             }
         });

@@ -1,4 +1,4 @@
-package fasde.android.distanceapp;
+package fasde.android.distanceapp.Views;
 
 import android.content.Intent;
 import android.os.Bundle;

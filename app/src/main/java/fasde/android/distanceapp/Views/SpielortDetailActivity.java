@@ -1,4 +1,4 @@
-package fasde.android.distanceapp;
+package fasde.android.distanceapp.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import fasde.android.distanceapp.R;
 /**
  * DetailView that shows Details about a specific Spielort
  */

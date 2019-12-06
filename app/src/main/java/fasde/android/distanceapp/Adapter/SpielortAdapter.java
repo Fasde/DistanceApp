@@ -1,4 +1,4 @@
-package fasde.android.distanceapp;
+package fasde.android.distanceapp.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,6 +17,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fasde.android.distanceapp.R;
+import fasde.android.distanceapp.Types.Spielort;
 
 /**
  * Custom Adapter for a ListView of Spielorts.
