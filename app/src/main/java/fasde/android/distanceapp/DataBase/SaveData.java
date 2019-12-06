@@ -2,12 +2,73 @@ package fasde.android.distanceapp.DataBase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
-import fasde.android.distanceapp.Types.Kreis;
-import fasde.android.distanceapp.Types.Spielort;
+import fasde.android.distanceapp.Model.Kreis;
+import fasde.android.distanceapp.Model.Spielort;
 
 public class SaveData {
+
+    public static HashMap<String, Spielort> fillVereine(String variante){
+        HashMap<String, Spielort> vereine = new HashMap<>();
+
+        switch (variante) {
+            case "Alle Kreise":
+                for (Spielort ort : SaveData.gottaListEmAll()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Emsland":
+                for (Spielort ort : SaveData.emslandMitte()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                for (Spielort ort : SaveData.emslandNord()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                for (Spielort ort : SaveData.emslandSued()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "EL-Nord":
+                for (Spielort ort : SaveData.emslandNord()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "EL-Mitte":
+                for (Spielort ort : SaveData.emslandMitte()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "EL-Süd":
+                for (Spielort ort : SaveData.emslandSued()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Grafschaft":
+                for (Spielort ort : SaveData.grafschaft()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Cloppenburg":
+                for (Spielort ort : SaveData.cloppenburg()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Ostfriesland":
+                for (Spielort ort : SaveData.ostfriesland()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+            case "Osnabrück":
+                for (Spielort ort : SaveData.osnabrück()) {
+                    vereine.put(ort.getSpielort(), ort);
+                }
+                break;
+        }
+
+        return vereine;
+    }
 
     public static List<Kreis> listAllKreise(){
         List<Kreis> kreisList = new ArrayList<>();

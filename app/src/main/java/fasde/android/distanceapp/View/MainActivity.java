@@ -1,4 +1,4 @@
-package fasde.android.distanceapp.Views;
+package fasde.android.distanceapp.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +17,8 @@ import java.util.TreeMap;
 
 import fasde.android.distanceapp.DataBase.SaveData;
 import fasde.android.distanceapp.R;
-import fasde.android.distanceapp.Types.Spielort;
-import fasde.android.distanceapp.Adapter.SpielortAdapter;
+import fasde.android.distanceapp.Model.Spielort;
+import fasde.android.distanceapp.Controller.SpielortAdapter;
 
 /**
  * Creates a Activity about a ListView of Spielorts.
@@ -50,64 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
         Map<String, Spielort> vereine = new TreeMap<>();
 
-        switch (variante) {
-            case "Alle Kreise":
-                for (Spielort ort : SaveData.gottaListEmAll()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                break;
-            case "EL-Gesamt":
-                for (Spielort ort : SaveData.emslandMitte()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                for (Spielort ort : SaveData.emslandNord()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                for (Spielort ort : SaveData.emslandSued()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                break;
-            case "EL-Nord":
-                for (Spielort ort : SaveData.emslandNord()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                break;
-            case "EL-Mitte":
-                for (Spielort ort : SaveData.emslandMitte()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                break;
-            case "EL-Süd":
-                for (Spielort ort : SaveData.emslandSued()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                break;
-            case "Grafschaft":
-                for (Spielort ort : SaveData.grafschaft()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                break;
-            case "Cloppenburg":
-                for (Spielort ort : SaveData.cloppenburg()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                break;
-            case "Ostfriesland":
-                for (Spielort ort : SaveData.ostfriesland()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                break;
-            case "Osnabrück":
-                for (Spielort ort : SaveData.osnabrück()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                break;
-        }
+        vereine.putAll(SaveData.fillVereine(variante));
 
         for (Map.Entry<String, Spielort> entry : vereine.entrySet()) {
             spielorts.add(entry.getValue());
         }
-
 
         spielortAdapter = new SpielortAdapter(this, spielorts);
 
@@ -126,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                // Nothing
             }
         });
 

@@ -1,4 +1,4 @@
-package fasde.android.distanceapp.Types;
+package fasde.android.distanceapp.Model;
 
 public enum Kreis {
 

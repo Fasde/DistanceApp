@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Views.MainActivity"
+            android:name=".View.MainActivity"
             android:label="@string/display_name"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity
-            android:name=".Views.SpielortDetailActivity"
+            android:name=".View.SpielortDetailActivity"
             android:label="@string/display_name"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity
-            android:name=".Views.SplashActivity"
+            android:name=".View.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Views.KreisPickActivity"
+            android:name=".View.KreisPickActivity"
             android:label="@string/display_name"/>
     </application>
 

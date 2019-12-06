@@ -1,4 +1,4 @@
-package fasde.android.distanceapp.Views;
+package fasde.android.distanceapp.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import java.util.List;
 
 import fasde.android.distanceapp.DataBase.SaveData;
 import fasde.android.distanceapp.R;
-import fasde.android.distanceapp.Types.Kreis;
+import fasde.android.distanceapp.Model.Kreis;
 
 /**
  * List of picks, to pick the Kreis of Spielorts.
@@ -39,7 +39,7 @@ public class KreisPickActivity extends AppCompatActivity {
 
         List<String> picks = new ArrayList<>();
         picks.add("Alle Kreise");
-        picks.add("EL-Gesamt");
+        picks.add("Emsland");
         for(Kreis kreis : SaveData.listAllKreise()){
             picks.add(kreis.getName());
         }

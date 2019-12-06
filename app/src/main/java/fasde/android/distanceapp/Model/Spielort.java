@@ -1,11 +1,9 @@
-package fasde.android.distanceapp.Types;
+package fasde.android.distanceapp.Model;
 
 import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * POJO for a Spielort.
