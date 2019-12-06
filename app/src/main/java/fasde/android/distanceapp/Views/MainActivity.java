@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     vereine.put(ort.getSpielort(), ort);
                 }
                 break;
-            case "Emsland-Gesamt":
+            case "EL-Gesamt":
                 for (Spielort ort : SaveData.emslandMitte()) {
                     vereine.put(ort.getSpielort(), ort);
                 }
@@ -67,17 +67,17 @@ public class MainActivity extends AppCompatActivity {
                     vereine.put(ort.getSpielort(), ort);
                 }
                 break;
-            case "Emsland-Nord":
+            case "EL-Nord":
                 for (Spielort ort : SaveData.emslandNord()) {
                     vereine.put(ort.getSpielort(), ort);
                 }
                 break;
-            case "Emsland-Mitte":
+            case "EL-Mitte":
                 for (Spielort ort : SaveData.emslandMitte()) {
                     vereine.put(ort.getSpielort(), ort);
                 }
                 break;
-            case "Emsland-Süd":
+            case "EL-Süd":
                 for (Spielort ort : SaveData.emslandSued()) {
                     vereine.put(ort.getSpielort(), ort);
                 }
