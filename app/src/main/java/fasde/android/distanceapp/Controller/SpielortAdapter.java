@@ -18,8 +18,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import fasde.android.distanceapp.R;
 import fasde.android.distanceapp.Model.Spielort;
+import fasde.android.distanceapp.R;
 
 /**
  * Custom Adapter for a ListView of Spielorts.

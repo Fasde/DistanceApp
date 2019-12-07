@@ -7,10 +7,12 @@ import java.util.List;
 
 import fasde.android.distanceapp.Model.Kreis;
 import fasde.android.distanceapp.Model.Spielort;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class SaveData {
 
-    public static HashMap<String, Spielort> fillVereine(String variante){
+    public HashMap<String, Spielort> fillVereine(String variante) {
         HashMap<String, Spielort> vereine = new HashMap<>();
 
         switch (variante) {
@@ -70,13 +72,13 @@ public class SaveData {
         return vereine;
     }
 
-    public static List<Kreis> listAllKreise(){
+    public List<Kreis> listAllKreise() {
         List<Kreis> kreisList = new ArrayList<>();
         kreisList.addAll(Arrays.asList(Kreis.values()));
         return kreisList;
     }
 
-    public static List<Spielort> gottaListEmAll() {
+    private List<Spielort> gottaListEmAll() {
         List<Spielort> allPlaces = new ArrayList<>();
         allPlaces.addAll(emslandNord());
         allPlaces.addAll(emslandMitte());
@@ -88,7 +90,7 @@ public class SaveData {
         return allPlaces;
     }
 
-    public static List<Spielort> emslandNord() {
+    private List<Spielort> emslandNord() {
         List<Spielort> emslandNord = new ArrayList<>();
         emslandNord.add(new Spielort("Ahlen-Steinbild", 33, Kreis.EL_NORD, "26892 Kluse, Ahornstraße 13"));
         emslandNord.add(new Spielort("Aschendorf", 47, Kreis.EL_NORD, "26871 Papenburg Emdener Str. 36"));
@@ -134,7 +136,7 @@ public class SaveData {
         return emslandNord;
     }
 
-    public static List<Spielort> emslandMitte() {
+    private List<Spielort> emslandMitte() {
         List<Spielort> emslandMitte = new ArrayList<>();
         emslandMitte.add(new Spielort("Adorf", 26, Kreis.EL_MITTE, "49767 Twist, Am Fuchsbau 7"));
         emslandMitte.add(new Spielort("Ahmsen", 42, Kreis.EL_MITTE, "49774 Lähnden, Am Sportplatz 26"));
@@ -182,7 +184,7 @@ public class SaveData {
         return emslandMitte;
     }
 
-    public static List<Spielort> emslandSued() {
+    private List<Spielort> emslandSued() {
         List<Spielort> emsLandSued = new ArrayList<>();
         emsLandSued.add(new Spielort("Altenlingen", 30, Kreis.EL_SUED, "49808 Lingen, Wallkamp 11"));
         emsLandSued.add(new Spielort("Andervenne", 50, Kreis.EL_SUED, "49832 Andervenne, Schulstraße 6"));
@@ -216,7 +218,7 @@ public class SaveData {
         return emsLandSued;
     }
 
-    public static List<Spielort> grafschaft() {
+    private List<Spielort> grafschaft() {
         List<Spielort> grafschaft = new ArrayList<>();
         grafschaft.add(new Spielort("Nordhorn (AP)", 50, Kreis.GRAFSCHAFT, "48529 Nordhorn, Westfalenstr. 28"));
         grafschaft.add(new Spielort("Nordhorn (Blanke)", 50, Kreis.GRAFSCHAFT, "48529 Nordhorn, Westfalenstr. 28"));
@@ -258,17 +260,17 @@ public class SaveData {
         return grafschaft;
     }
 
-    public static List<Spielort> ostfriesland() {
+    private List<Spielort> ostfriesland() {
         List<Spielort> ostfriesland = new ArrayList<>();
         return ostfriesland;
     }
 
-    public static List<Spielort> cloppenburg() {
+    private List<Spielort> cloppenburg() {
         List<Spielort> cloppenburg = new ArrayList<>();
         return cloppenburg;
     }
 
-    public static List<Spielort> osnabrück() {
+    private List<Spielort> osnabrück() {
         List<Spielort> osna = new ArrayList<>();
         return osna;
     }

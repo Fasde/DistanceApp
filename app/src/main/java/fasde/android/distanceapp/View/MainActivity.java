@@ -11,14 +11,17 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import fasde.android.distanceapp.DataBase.SaveData;
-import fasde.android.distanceapp.R;
-import fasde.android.distanceapp.Model.Spielort;
 import fasde.android.distanceapp.Controller.SpielortAdapter;
+import fasde.android.distanceapp.DataBase.SaveData;
+import fasde.android.distanceapp.Model.Spielort;
+import fasde.android.distanceapp.R;
+import lombok.NonNull;
 
 /**
  * Creates a Activity about a ListView of Spielorts.
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
+        @NotNull
         String variante = intent.getStringExtra("variante");
 
         listView = findViewById(R.id.list);
@@ -49,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Spielort> spielorts = new ArrayList<>();
 
         Map<String, Spielort> vereine = new TreeMap<>();
-
         vereine.putAll(SaveData.fillVereine(variante));
 
         for (Map.Entry<String, Spielort> entry : vereine.entrySet()) {
@@ -57,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         spielortAdapter = new SpielortAdapter(this, spielorts);
-
         listView.setAdapter(spielortAdapter);
 
         editText.addTextChangedListener(new TextWatcher() {

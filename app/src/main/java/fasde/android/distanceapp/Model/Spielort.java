@@ -1,19 +1,30 @@
 package fasde.android.distanceapp.Model;
 
-import androidx.annotation.NonNull;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import lombok.Getter;
 
 /**
  * POJO for a Spielort.
  */
+
 public class Spielort {
 
+    @Getter
+    @lombok.NonNull
     private String spielort;
+    @Getter
+    @lombok.NonNull
     private int distanz;
+    @Getter
+    @lombok.NonNull
     private BigDecimal kosten;
+    @Getter
+    @lombok.NonNull
     private Kreis kreis;
+    @Getter
+    @lombok.NonNull
     private String adresse;
 
     public Spielort(String spielort, int distanz, Kreis kreis, String adresse) {
@@ -24,28 +35,8 @@ public class Spielort {
         this.adresse = adresse;
     }
 
-    public String getSpielort() {
-        return spielort;
-    }
-
-    public int getDistanz() {
-        return distanz;
-    }
-
-    public BigDecimal getKosten() {
-        return kosten;
-    }
-
-    public Kreis getKreis() {
-        return kreis;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
     @Override
-    @NonNull
+    @androidx.annotation.NonNull
     public String toString() {
         return this.getSpielort() + "\n" + this.getKreis().getName() + "\t\t--\t\t" + this.getDistanz() + "km" + "\t\t--\t\t" + this.getKosten() + "€";
     }

@@ -7,7 +7,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import fasde.android.distanceapp.R;
+import lombok.NonNull;
+
 /**
  * DetailView that shows Details about a specific Spielort
  */
@@ -25,19 +29,25 @@ public class SpielortDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_detail);
 
-        TextView ort = findViewById(R.id.detail_ort);
-        TextView distanz = findViewById(R.id.detail_km);
-        TextView kosten = findViewById(R.id.detail_kosten);
-        TextView kreis = findViewById(R.id.detail_kreis);
-        TextView adresse = findViewById(R.id.detail_adresse);
+        TextView ortView = findViewById(R.id.detail_ort);
+        TextView distanzView = findViewById(R.id.detail_km);
+        TextView kostenView = findViewById(R.id.detail_kosten);
+        TextView kreisView = findViewById(R.id.detail_kreis);
+        TextView adresseView = findViewById(R.id.detail_adresse);
 
         Intent intent = getIntent();
         spielortA = intent.getStringArrayExtra("spielort");
 
-        ort.setText("\t" + spielortA[0]);
-        distanz.setText("Distanz: \n\t\t" + spielortA[1] + "km pro Strecke");
-        kosten.setText("Fahrtkosten: \n\t\t " + spielortA[2] + "€");
-        kreis.setText("Kreis: \n\t\t " + spielortA[3]);
-        adresse.setText("Adresse: \n\t\t " + spielortA[4] + "\n\t\t" + spielortA[5]);
+        String ortString = "\t" + spielortA[0];
+        String distanzString = "Distanz: \n\t\t" + spielortA[1] + "km pro Strecke";
+        String kostenString = "Fahrtkosten: \n\t\t " + spielortA[2] + "€";
+        String kreisString = "Kreis: \n\t\t " + spielortA[3];
+        String adresseString = "Adresse: \n\t\t " + spielortA[4] + "\n\t\t" + spielortA[5];
+
+        ortView.setText(ortString);
+        distanzView.setText(distanzString);
+        kostenView.setText(kostenString);
+        kreisView.setText(kreisString);
+        adresseView.setText(adresseString);
     }
 }
