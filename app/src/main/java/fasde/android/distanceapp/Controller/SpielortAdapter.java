@@ -102,6 +102,14 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
         return filter;
     }
 
+    /**
+     * Returns the item of the current position in the list.
+     * The list used is not the complete list of all items, it is the list where possible searches
+     * are already executed.
+     *
+     * @param position
+     * @return Spielort at given position
+     */
     @Override
     public Spielort getItem(int position){
         return spielortList.get(position);
