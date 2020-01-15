@@ -102,6 +102,11 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
         return filter;
     }
 
+    @Override
+    public Spielort getItem(int position){
+        return spielortList.get(position);
+    }
+
     private class SpielortFilter extends Filter {
 
         /**
@@ -113,11 +118,10 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
          */
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            constraint = constraint.toString().toLowerCase();
             FilterResults results = new FilterResults();
             filteredList = new ArrayList<>();
             for (Spielort ort : allDataList) {
-                if (ort.getSpielort().toLowerCase().contains(constraint)) {
+                if (ort.getSpielort().toLowerCase().contains(constraint.toString().toLowerCase())) {
                     filteredList.add(ort);
                 }
             }
