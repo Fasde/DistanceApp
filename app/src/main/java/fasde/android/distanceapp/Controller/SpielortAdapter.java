@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,17 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
     @Override
     public int getCount() {
         return spielortList.size();
+    }
+
+    /**
+     * Method just for testing purposes.
+     * Returns the spielOrtList to check if the constructor is working properly.
+     *
+     * @return the spielortList
+     */
+    @TestOnly
+    public List<Spielort> getSpielortList(){
+        return this.spielortList;
     }
 
     /**
