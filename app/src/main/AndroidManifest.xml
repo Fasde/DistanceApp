@@ -28,6 +28,7 @@
         <activity
             android:name=".View.KreisPickActivity"
             android:label="@string/display_name"/>
+        <activity android:name=".View.ImpressumActivity" />
     </application>
 
 </manifest>

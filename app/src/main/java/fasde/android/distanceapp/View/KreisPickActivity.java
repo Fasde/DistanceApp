@@ -1,13 +1,19 @@
 package fasde.android.distanceapp.View;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -24,6 +30,8 @@ public class KreisPickActivity extends AppCompatActivity {
 
     ListView listView;
     ArrayAdapter<String> arrayAdapter;
+    String variante;
+    Context context = this;
 
     /**
      * Creates a view to display the picks to pick a Kreis of Spielorts.
@@ -34,6 +42,11 @@ public class KreisPickActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kreis_pick_activity);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         listView = findViewById(R.id.pickList);
 
@@ -51,9 +64,49 @@ public class KreisPickActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent openListView = new Intent(KreisPickActivity.this, MainActivity.class);
-                openListView.putExtra("variante", (String) listView.getItemAtPosition(position));
+                openListView.putExtra("variante", (variante = (String) listView.getItemAtPosition(position)));
+                Toast.makeText(context, "Öffne Spielort-Liste des gewählten Kreises...", Toast.LENGTH_SHORT).show();
                 startActivity(openListView);
+                finish();
             }
         });
+    }
+
+    /**
+     * Sets the menu button to open the menu.
+     *
+     * @param menu the menu source file
+     * @return true as the menu will always be added
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    /**
+     * Defines the action to do, depending of which option is selected from the menu.
+     *
+     * @param item the item selected from the menu
+     * @return the boolean value of the item selected
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Impressum: {
+                Intent openImpressum = new Intent(KreisPickActivity.this, ImpressumActivity.class).putExtra("PrevClass", "KreisPick");
+                openImpressum.putExtra("variante", variante);
+                Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT).show();
+                startActivity(openImpressum);
+                finish();
+                break;
+            }
+            case android.R.id.home: {
+                Toast.makeText(this, "Schließe...", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
