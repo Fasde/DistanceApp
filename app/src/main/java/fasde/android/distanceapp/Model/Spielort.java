@@ -15,7 +15,6 @@ public class Spielort {
     @lombok.NonNull
     private String spielort;
     @Getter
-    @lombok.NonNull
     private int distanz;
     @Getter
     @lombok.NonNull
