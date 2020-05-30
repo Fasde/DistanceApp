@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import fasde.android.distanceapp.Model.Spielort;
 import fasde.android.distanceapp.R;
 
 /**
@@ -19,7 +20,9 @@ import fasde.android.distanceapp.R;
  */
 public class SpielortDetailActivity extends AppCompatActivity {
 
-    String[] spielortA;
+    String[] spielortArray;
+
+    private static Spielort aktuellerSpielort;
 
     /**
      * Creates a view, that shoes details about a specific Spielort.
@@ -43,13 +46,13 @@ public class SpielortDetailActivity extends AppCompatActivity {
         TextView adresseView = findViewById(R.id.detail_adresse);
 
         Intent intent = getIntent();
-        spielortA = intent.getStringArrayExtra("spielort");
+        spielortArray = aktuellerSpielort.toStringArray();
 
-        String ortString = "\t" + spielortA[0];
-        String distanzString = "Distanz: \n\t\t" + spielortA[1] + "km pro Strecke";
-        String kostenString = "Fahrtkosten: \n\t\t " + spielortA[2] + "€";
-        String kreisString = "Kreis: \n\t\t " + spielortA[3];
-        String adresseString = "Adresse: \n\t\t " + spielortA[4] + "\n\t\t" + spielortA[5];
+        String ortString = "\t" + spielortArray[0];
+        String distanzString = "Distanz: \n\t\t" + spielortArray[1] + "km pro Strecke";
+        String kostenString = "Fahrtkosten: \n\t\t " + spielortArray[2] + "€";
+        String kreisString = "Kreis: \n\t\t " + spielortArray[3];
+        String adresseString = "Adresse: \n\t\t " + spielortArray[4] + "\n\t\t" + spielortArray[5];
 
         ortView.setText(ortString);
         distanzView.setText(distanzString);
@@ -81,8 +84,6 @@ public class SpielortDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.Impressum: {
                 Intent openImpressum = new Intent(SpielortDetailActivity.this, ImpressumActivity.class).putExtra("PrevClass", "SpielOrtDetail");
-                openImpressum.putExtra("spielort", getIntent().getStringArrayExtra("spielort"));
-                openImpressum.putExtra("variante", getIntent().getStringExtra("variante"));
                 Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT).show();
                 startActivity(openImpressum);
                 finish();
@@ -96,5 +97,9 @@ public class SpielortDetailActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void setAktuellerSpielort(Spielort spielort){
+        aktuellerSpielort = spielort;
     }
 }

@@ -30,7 +30,6 @@ public class KreisPickActivity extends AppCompatActivity {
 
     ListView listView;
     ArrayAdapter<String> arrayAdapter;
-    String variante;
     Context context = this;
 
     /**
@@ -45,7 +44,7 @@ public class KreisPickActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(false);
         }
 
         listView = findViewById(R.id.pickList);
@@ -64,7 +63,7 @@ public class KreisPickActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent openListView = new Intent(KreisPickActivity.this, MainActivity.class);
-                openListView.putExtra("variante", (variante = (String) listView.getItemAtPosition(position)));
+                MainActivity.setAktuellerKreis((String) listView.getItemAtPosition(position));
                 Toast.makeText(context, "Öffne Spielort-Liste des gewählten Kreises...", Toast.LENGTH_SHORT).show();
                 startActivity(openListView);
                 finish();
@@ -95,7 +94,6 @@ public class KreisPickActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.Impressum: {
                 Intent openImpressum = new Intent(KreisPickActivity.this, ImpressumActivity.class).putExtra("PrevClass", "KreisPick");
-                openImpressum.putExtra("variante", variante);
                 Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT).show();
                 startActivity(openImpressum);
                 finish();

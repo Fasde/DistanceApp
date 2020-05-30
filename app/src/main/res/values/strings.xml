@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DistanceApp</string>
     <string name="display_name">Spielort-Distanz</string>
-    <string name="version">1.9.5</string>
+    <string name="version">1.10.0</string>
     <string name="author">Fabian Poker</string>
     <string name="author2">Fasde</string>
     <string name="edit_text_hint">Suche nach String</string>

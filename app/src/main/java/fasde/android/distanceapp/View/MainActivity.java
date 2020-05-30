@@ -14,10 +14,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -32,6 +31,8 @@ import fasde.android.distanceapp.R;
  * Creates a Activity about a ListView of Spielorts.
  */
 public class MainActivity extends AppCompatActivity {
+
+    private static String aktuellerKreis;
 
     ListView listView;
     SpielortAdapter spielortAdapter;
@@ -56,16 +57,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        @NotNull
-        String variante = intent.getStringExtra("variante");
-
         listView = findViewById(R.id.list);
         editText = findViewById(R.id.inputSearch);
 
         ArrayList<Spielort> spielorts = new ArrayList<>();
 
         Map<String, Spielort> vereine = new TreeMap<>();
-        vereine.putAll(SaveData.fillVereine(variante));
+        vereine.putAll(SaveData.fillVereine(aktuellerKreis));
 
         for (Map.Entry<String, Spielort> entry : vereine.entrySet()) {
             spielorts.add(entry.getValue());
@@ -95,9 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent openDetail = new Intent(MainActivity.this, SpielortDetailActivity.class)
-                        .putExtra("spielort", (spielOrt = ((Spielort) listView.getItemAtPosition(position)).toStringArray()));
-                openDetail.putExtra("variante", getIntent().getStringExtra("variante"));
+                Intent openDetail = new Intent(MainActivity.this, SpielortDetailActivity.class);
+                SpielortDetailActivity.setAktuellerSpielort((Spielort) listView.getItemAtPosition(position));
                 Toast.makeText(context, "Öffne gewählten Spielort...", Toast.LENGTH_SHORT).show();
                 startActivity(openDetail);
                 finish();
@@ -130,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.Impressum: {
                 Intent openImpressum = new Intent(MainActivity.this, ImpressumActivity.class).putExtra("PrevClass", "Main");
-                openImpressum.putExtra("variante", getIntent().getStringExtra("variante"));
-                openImpressum.putExtra("spielort", spielOrt);
                 Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT).show();
                 startActivity(openImpressum);
                 finish();
@@ -146,4 +141,10 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public static void setAktuellerKreis(@Nullable String kreis){
+        aktuellerKreis = kreis;
+    }
+
+
 }
