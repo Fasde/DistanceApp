@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     SpielortAdapter spielortAdapter;
     EditText editText;
-    String[] spielOrt;
     Context context = this;
 
     /**
@@ -56,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        Intent intent = getIntent();
         listView = findViewById(R.id.list);
         editText = findViewById(R.id.inputSearch);
 
@@ -97,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 SpielortDetailActivity.setAktuellerSpielort((Spielort) listView.getItemAtPosition(position));
                 Toast.makeText(context, "Öffne gewählten Spielort...", Toast.LENGTH_SHORT).show();
                 startActivity(openDetail);
-                finish();
             }
         });
 
@@ -129,14 +126,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent openImpressum = new Intent(MainActivity.this, ImpressumActivity.class).putExtra("PrevClass", "Main");
                 Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT).show();
                 startActivity(openImpressum);
-                finish();
                 break;
             }
             case android.R.id.home: {
                 Intent openKreisPick = new Intent(MainActivity.this, KreisPickActivity.class);
                 Toast.makeText(this, "Schließe Liste des Kreises...", Toast.LENGTH_SHORT).show();
                 startActivity(openKreisPick);
-                finish();
             }
         }
         return super.onOptionsItemSelected(item);

@@ -45,7 +45,6 @@ public class SpielortDetailActivity extends AppCompatActivity {
         TextView kreisView = findViewById(R.id.detail_kreis);
         TextView adresseView = findViewById(R.id.detail_adresse);
 
-        Intent intent = getIntent();
         spielortArray = aktuellerSpielort.toStringArray();
 
         String ortString = "\t" + spielortArray[0];
@@ -86,14 +85,12 @@ public class SpielortDetailActivity extends AppCompatActivity {
                 Intent openImpressum = new Intent(SpielortDetailActivity.this, ImpressumActivity.class).putExtra("PrevClass", "SpielOrtDetail");
                 Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT).show();
                 startActivity(openImpressum);
-                finish();
                 break;
             }
             case android.R.id.home: {
                 Intent openMain = new Intent(SpielortDetailActivity.this, MainActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
                 Toast.makeText(this, "Schließe Detailansicht...", Toast.LENGTH_SHORT).show();
                 startActivity(openMain);
-                finish();
             }
         }
         return super.onOptionsItemSelected(item);

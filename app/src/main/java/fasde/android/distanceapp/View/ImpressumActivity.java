@@ -72,27 +72,25 @@ public class ImpressumActivity extends AppCompatActivity {
             }
             case android.R.id.home:
                 String previousClass = getIntent().getStringExtra("PrevClass");
+                assert previousClass != null;
                 switch (previousClass) {
                     case "SpielOrtDetail": {
                         Intent openSpielOrtDetail = new Intent(ImpressumActivity.this, SpielortDetailActivity.class).putExtra("spielort", getIntent().getStringArrayExtra("spielort"));
                         openSpielOrtDetail.putExtra("variante", getIntent().getStringExtra("variante"));
                         Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT).show();
                         startActivity(openSpielOrtDetail);
-                        finish();
                         break;
                     }
                     case "Main": {
                         Intent openMain = new Intent(ImpressumActivity.this, MainActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
                         Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT).show();
                         startActivity(openMain);
-                        finish();
                         break;
                     }
                     case "KreisPick": {
                         Intent openKreisPick = new Intent(ImpressumActivity.this, KreisPickActivity.class);
                         Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT).show();
                         startActivity(openKreisPick);
-                        finish();
                         break;
                     }
                 }

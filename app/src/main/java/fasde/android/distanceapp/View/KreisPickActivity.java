@@ -66,7 +66,6 @@ public class KreisPickActivity extends AppCompatActivity {
                 MainActivity.setAktuellerKreis((String) listView.getItemAtPosition(position));
                 Toast.makeText(context, "Öffne Spielort-Liste des gewählten Kreises...", Toast.LENGTH_SHORT).show();
                 startActivity(openListView);
-                finish();
             }
         });
     }
@@ -96,12 +95,10 @@ public class KreisPickActivity extends AppCompatActivity {
                 Intent openImpressum = new Intent(KreisPickActivity.this, ImpressumActivity.class).putExtra("PrevClass", "KreisPick");
                 Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT).show();
                 startActivity(openImpressum);
-                finish();
                 break;
             }
             case android.R.id.home: {
                 Toast.makeText(this, "Schließe...", Toast.LENGTH_SHORT).show();
-                finish();
                 break;
             }
         }
