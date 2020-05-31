@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fasde.android.distanceapp.DataBase.SaveData;
+import fasde.android.distanceapp.DataBase.Toolbox;
 import fasde.android.distanceapp.Model.Kreis;
 import fasde.android.distanceapp.R;
 
@@ -27,6 +28,8 @@ import fasde.android.distanceapp.R;
  * List of picks, to pick the Kreis of Spielorts.
  */
 public class KreisPickActivity extends AppCompatActivity {
+
+    private static Toast toastNow;
 
     ListView listView;
     ArrayAdapter<String> arrayAdapter;
@@ -64,7 +67,9 @@ public class KreisPickActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent openListView = new Intent(KreisPickActivity.this, MainActivity.class);
                 MainActivity.setAktuellerKreis((String) listView.getItemAtPosition(position));
-                Toast.makeText(context, "Öffne Spielort-Liste des gewählten Kreises...", Toast.LENGTH_SHORT).show();
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(context, "Öffne Spielort-Liste des gewählten Kreises...", Toast.LENGTH_SHORT);
+                toastNow.show();
                 startActivity(openListView);
             }
         });
@@ -93,15 +98,24 @@ public class KreisPickActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.Impressum: {
                 Intent openImpressum = new Intent(KreisPickActivity.this, ImpressumActivity.class).putExtra("PrevClass", "KreisPick");
-                Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT).show();
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT);
+                toastNow.show();
                 startActivity(openImpressum);
                 break;
             }
             case android.R.id.home: {
-                Toast.makeText(this, "Schließe...", Toast.LENGTH_SHORT).show();
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Schließe...", Toast.LENGTH_SHORT);
+                toastNow.show();
                 break;
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void killToast(){
+        if(toastNow != null)
+            toastNow.cancel();
     }
 }

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import fasde.android.distanceapp.DataBase.Toolbox;
 import fasde.android.distanceapp.Model.Spielort;
 import fasde.android.distanceapp.R;
 
@@ -23,6 +24,7 @@ public class SpielortDetailActivity extends AppCompatActivity {
     String[] spielortArray;
 
     private static Spielort aktuellerSpielort;
+    private static Toast toastNow;
 
     /**
      * Creates a view, that shoes details about a specific Spielort.
@@ -83,13 +85,17 @@ public class SpielortDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.Impressum: {
                 Intent openImpressum = new Intent(SpielortDetailActivity.this, ImpressumActivity.class).putExtra("PrevClass", "SpielOrtDetail");
-                Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT).show();
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT);
+                toastNow.show();
                 startActivity(openImpressum);
                 break;
             }
             case android.R.id.home: {
                 Intent openMain = new Intent(SpielortDetailActivity.this, MainActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
-                Toast.makeText(this, "Schließe Detailansicht...", Toast.LENGTH_SHORT).show();
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Schließe Detailansicht...", Toast.LENGTH_SHORT);
+                toastNow.show();
                 startActivity(openMain);
             }
         }
@@ -98,5 +104,10 @@ public class SpielortDetailActivity extends AppCompatActivity {
 
     public static void setAktuellerSpielort(Spielort spielort){
         aktuellerSpielort = spielort;
+    }
+
+    public static void killToast(){
+        if(toastNow != null)
+            toastNow.cancel();
     }
 }

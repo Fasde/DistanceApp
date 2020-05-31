@@ -24,6 +24,7 @@ import java.util.TreeMap;
 
 import fasde.android.distanceapp.Controller.SpielortAdapter;
 import fasde.android.distanceapp.DataBase.SaveData;
+import fasde.android.distanceapp.DataBase.Toolbox;
 import fasde.android.distanceapp.Model.Spielort;
 import fasde.android.distanceapp.R;
 
@@ -33,6 +34,7 @@ import fasde.android.distanceapp.R;
 public class MainActivity extends AppCompatActivity {
 
     private static String aktuellerKreis;
+    private static Toast toastNow;
 
     ListView listView;
     SpielortAdapter spielortAdapter;
@@ -93,7 +95,9 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent openDetail = new Intent(MainActivity.this, SpielortDetailActivity.class);
                 SpielortDetailActivity.setAktuellerSpielort((Spielort) listView.getItemAtPosition(position));
-                Toast.makeText(context, "Öffne gewählten Spielort...", Toast.LENGTH_SHORT).show();
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(context, "Öffne gewählten Spielort...", Toast.LENGTH_SHORT);
+                toastNow.show();
                 startActivity(openDetail);
             }
         });
@@ -124,13 +128,17 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.Impressum: {
                 Intent openImpressum = new Intent(MainActivity.this, ImpressumActivity.class).putExtra("PrevClass", "Main");
-                Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT).show();
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT);
+                toastNow.show();
                 startActivity(openImpressum);
                 break;
             }
             case android.R.id.home: {
                 Intent openKreisPick = new Intent(MainActivity.this, KreisPickActivity.class);
-                Toast.makeText(this, "Schließe Liste des Kreises...", Toast.LENGTH_SHORT).show();
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Schließe Liste des Kreises...", Toast.LENGTH_SHORT);
+                toastNow.show();
                 startActivity(openKreisPick);
             }
         }
@@ -141,5 +149,8 @@ public class MainActivity extends AppCompatActivity {
         aktuellerKreis = kreis;
     }
 
-
+    public static void killToast(){
+        if(toastNow != null)
+            toastNow.cancel();
+    }
 }

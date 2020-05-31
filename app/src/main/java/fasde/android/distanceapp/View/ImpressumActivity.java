@@ -12,9 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import fasde.android.distanceapp.DataBase.Toolbox;
 import fasde.android.distanceapp.R;
 
 public class ImpressumActivity extends AppCompatActivity {
+
+    private static Toast toastNow;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,7 +69,9 @@ public class ImpressumActivity extends AppCompatActivity {
             case R.id.Impressum: {
                 Intent openImpressum = new Intent(ImpressumActivity.this, ImpressumActivity.class);
                 startActivity(openImpressum);
-                Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT).show();
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT);
+                toastNow.show();
                 finish();
                 break;
             }
@@ -77,25 +82,35 @@ public class ImpressumActivity extends AppCompatActivity {
                     case "SpielOrtDetail": {
                         Intent openSpielOrtDetail = new Intent(ImpressumActivity.this, SpielortDetailActivity.class).putExtra("spielort", getIntent().getStringArrayExtra("spielort"));
                         openSpielOrtDetail.putExtra("variante", getIntent().getStringExtra("variante"));
-                        Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT).show();
+                        Toolbox.killAllToasts();
+                        toastNow = Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT);
+                        toastNow.show();
                         startActivity(openSpielOrtDetail);
                         break;
                     }
                     case "Main": {
                         Intent openMain = new Intent(ImpressumActivity.this, MainActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
-                        Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT).show();
+                        Toolbox.killAllToasts();
+                        toastNow = Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT);
+                        toastNow.show();
                         startActivity(openMain);
                         break;
                     }
                     case "KreisPick": {
                         Intent openKreisPick = new Intent(ImpressumActivity.this, KreisPickActivity.class);
-                        Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT).show();
-                        startActivity(openKreisPick);
+                        Toolbox.killAllToasts();
+                        toastNow = Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT);
+                        toastNow.show();startActivity(openKreisPick);
                         break;
                     }
                 }
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void killToast(){
+        if(toastNow != null)
+            toastNow.cancel();
     }
 }
