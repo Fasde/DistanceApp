@@ -93,7 +93,7 @@ public class SaveData {
     private List<Spielort> emslandNord() {
         List<Spielort> emslandNord = new ArrayList<>();
         emslandNord.add(new Spielort("Ahlen-Steinbild", 33, Kreis.EL_NORD, "26892 Kluse, Ahornstraße 13"));
-        emslandNord.add(new Spielort("Aschendorf", 47, Kreis.EL_NORD, "26871 Papenburg Emdener Str. 36"));
+        emslandNord.add(new Spielort("Aschendorf", 47, Kreis.EL_NORD, "26871 Papenburg, Emdener Str. 36"));
         emslandNord.add(new Spielort("Aschendorfermoor", 51, Kreis.EL_NORD, "26871 Aschendorfermoor, Glatzer Str. 13"));
         emslandNord.add(new Spielort("Bockholte", 47, Kreis.EL_NORD, "49757 Werlte, Westerkamp 16"));
         emslandNord.add(new Spielort("Bockhorst", 57, Kreis.EL_NORD, "26897 Bockhorst, Am Sportplatz 22"));
