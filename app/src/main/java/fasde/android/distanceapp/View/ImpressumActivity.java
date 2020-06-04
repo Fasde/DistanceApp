@@ -29,19 +29,26 @@ public class ImpressumActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        TextView appDetailHeader = findViewById(R.id.app_detail_header);
         TextView appDetail = findViewById(R.id.app_detail);
-        TextView appAuthor = findViewById(R.id.app_author);
+        TextView appVersionHeader = findViewById(R.id.app_version_header);
         TextView appVersion = findViewById(R.id.app_version);
+        TextView appAuthorHeader = findViewById(R.id.app_author_header);
+        TextView appAuthor = findViewById(R.id.app_author);
+        TextView appCodeHeader = findViewById(R.id.app_code_header);
+        TextView appCode = findViewById(R.id.app_code);
 
-        String detail = "Zweck und Inhalt:\n\t\tDiese App wurde geschaffen, um \n\t\teine kleine, nette, und vor allem " +
-                "\n\t\tselbstprogrammierte Hilfe zu sein, \n\t\tum die Spritkosten und \n\t\tFahrtweiten, sowie die" +
-                " Adressen \n\t\tder Fußballplätze im Bezirk \n\t\tWeser-Ems, vor allem des \n\t\tEmslands, zu sein.";
-        String version = "\n\nApp-Informationen:\n\t\t" + getString(R.string.app_name) + "\n\t\t" + getString(R.string.version);
-        String author = "\n\nAutor:\n\t\t" + getString(R.string.author) + "(" + getString(R.string.author2) + ")";
+        String authorString = getString(R.string.authorString1) + getString(R.string.authorString3);
+        String versionString = getString(R.string.app_name) + getString(R.string.versionString) + getString(R.string.version);
 
-        appDetail.setText(detail);
-        appAuthor.setText(author);
-        appVersion.setText(version);
+        appDetailHeader.setText(R.string.detailHeader);
+        appDetail.setText(R.string.detail);
+        appAuthorHeader.setText(R.string.authorHeader);
+        appAuthor.setText(authorString);
+        appVersionHeader.setText(R.string.versionHeader);
+        appVersion.setText(versionString);
+        appCodeHeader.setText(R.string.codeHeader);
+        appCode.setText(R.string.codeAdress);
     }
 
     /**
