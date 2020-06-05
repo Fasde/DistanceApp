@@ -1,4 +1,4 @@
-package fasde.android.distanceapp.Model;
+package fasde.android.distanceapp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

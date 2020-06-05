@@ -2,7 +2,7 @@ package fasde.android.distanceapp.UnitTests;
 
 import org.junit.Test;
 
-import fasde.android.distanceapp.Model.Kreis;
+import fasde.android.distanceapp.model.Kreis;
 
 import static org.junit.Assert.assertEquals;
 

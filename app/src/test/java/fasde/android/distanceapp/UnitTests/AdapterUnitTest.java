@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import fasde.android.distanceapp.Controller.SpielortAdapter;
-import fasde.android.distanceapp.Model.Spielort;
+import fasde.android.distanceapp.controller.SpielortAdapter;
+import fasde.android.distanceapp.model.Spielort;
 
 import static org.junit.Assert.assertEquals;
 

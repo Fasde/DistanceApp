@@ -1,9 +1,9 @@
-package fasde.android.distanceapp.DataBase;
+package fasde.android.distanceapp.database;
 
-import fasde.android.distanceapp.View.ImpressumActivity;
-import fasde.android.distanceapp.View.KreisPickActivity;
-import fasde.android.distanceapp.View.MainActivity;
-import fasde.android.distanceapp.View.SpielortDetailActivity;
+import fasde.android.distanceapp.view.ImpressumActivity;
+import fasde.android.distanceapp.view.KreisPickActivity;
+import fasde.android.distanceapp.view.MainActivity;
+import fasde.android.distanceapp.view.SpielortDetailActivity;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

@@ -1,4 +1,4 @@
-package fasde.android.distanceapp.View;
+package fasde.android.distanceapp.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,10 +22,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import fasde.android.distanceapp.Controller.SpielortAdapter;
-import fasde.android.distanceapp.DataBase.SaveData;
-import fasde.android.distanceapp.DataBase.Toolbox;
-import fasde.android.distanceapp.Model.Spielort;
+import fasde.android.distanceapp.controller.SpielortAdapter;
+import fasde.android.distanceapp.database.SaveData;
+import fasde.android.distanceapp.database.Toolbox;
+import fasde.android.distanceapp.model.Spielort;
 import fasde.android.distanceapp.R;
 
 /**
@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Spielort> spielorts = new ArrayList<>();
 
-        Map<String, Spielort> vereine = new TreeMap<>();
-        vereine.putAll(SaveData.fillVereine(aktuellerKreis));
+        Map<String, Spielort> vereine = new TreeMap<>(SaveData.fillVereine(aktuellerKreis));
 
         for (Map.Entry<String, Spielort> entry : vereine.entrySet()) {
             spielorts.add(entry.getValue());
@@ -125,22 +124,19 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Impressum: {
-                Intent openImpressum = new Intent(MainActivity.this, ImpressumActivity.class).putExtra("PrevClass", "Main");
-                Toolbox.killAllToasts();
-                toastNow = Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT);
-                toastNow.show();
-                startActivity(openImpressum);
-                break;
-            }
-            case android.R.id.home: {
-                Intent openKreisPick = new Intent(MainActivity.this, KreisPickActivity.class);
-                Toolbox.killAllToasts();
-                toastNow = Toast.makeText(this, "Schließe Liste des Kreises...", Toast.LENGTH_SHORT);
-                toastNow.show();
-                startActivity(openKreisPick);
-            }
+        int itemId = item.getItemId();
+        if (itemId == R.id.Impressum) {
+            Intent openImpressum = new Intent(MainActivity.this, ImpressumActivity.class).putExtra("PrevClass", "Main");
+            Toolbox.killAllToasts();
+            toastNow = Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT);
+            toastNow.show();
+            startActivity(openImpressum);
+        } else if (itemId == android.R.id.home) {
+            Intent openKreisPick = new Intent(MainActivity.this, KreisPickActivity.class);
+            Toolbox.killAllToasts();
+            toastNow = Toast.makeText(this, "Schließe Liste des Kreises...", Toast.LENGTH_SHORT);
+            toastNow.show();
+            startActivity(openKreisPick);
         }
         return super.onOptionsItemSelected(item);
     }

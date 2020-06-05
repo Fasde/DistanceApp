@@ -1,4 +1,4 @@
-package fasde.android.distanceapp.View;
+package fasde.android.distanceapp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,19 +12,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import fasde.android.distanceapp.DataBase.Toolbox;
-import fasde.android.distanceapp.Model.Spielort;
 import fasde.android.distanceapp.R;
+import fasde.android.distanceapp.database.Toolbox;
+import fasde.android.distanceapp.model.Spielort;
 
 /**
  * DetailView that shows Details about a specific Spielort
  */
 public class SpielortDetailActivity extends AppCompatActivity {
 
-    String[] spielortArray;
-
     private static Spielort aktuellerSpielort;
     private static Toast toastNow;
+    String[] spielortArray;
+
+    public static void setAktuellerSpielort(Spielort spielort) {
+        aktuellerSpielort = spielort;
+    }
+
+    public static void killToast() {
+        if (toastNow != null)
+            toastNow.cancel();
+    }
 
     /**
      * Creates a view, that shoes details about a specific Spielort.
@@ -82,32 +90,19 @@ public class SpielortDetailActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Impressum: {
-                Intent openImpressum = new Intent(SpielortDetailActivity.this, ImpressumActivity.class).putExtra("PrevClass", "SpielOrtDetail");
-                Toolbox.killAllToasts();
-                toastNow = Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT);
-                toastNow.show();
-                startActivity(openImpressum);
-                break;
-            }
-            case android.R.id.home: {
-                Intent openMain = new Intent(SpielortDetailActivity.this, MainActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
-                Toolbox.killAllToasts();
-                toastNow = Toast.makeText(this, "Schließe Detailansicht...", Toast.LENGTH_SHORT);
-                toastNow.show();
-                startActivity(openMain);
-            }
+        if (item.getItemId() == R.id.Impressum) {
+            Intent openImpressum = new Intent(SpielortDetailActivity.this, ImpressumActivity.class).putExtra("PrevClass", "SpielOrtDetail");
+            Toolbox.killAllToasts();
+            toastNow = Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT);
+            toastNow.show();
+            startActivity(openImpressum);
+        } else if (item.getItemId() == android.R.id.home) {
+            Intent openMain = new Intent(SpielortDetailActivity.this, MainActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
+            Toolbox.killAllToasts();
+            toastNow = Toast.makeText(this, "Schließe Detailansicht...", Toast.LENGTH_SHORT);
+            toastNow.show();
+            startActivity(openMain);
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public static void setAktuellerSpielort(Spielort spielort){
-        aktuellerSpielort = spielort;
-    }
-
-    public static void killToast(){
-        if(toastNow != null)
-            toastNow.cancel();
     }
 }

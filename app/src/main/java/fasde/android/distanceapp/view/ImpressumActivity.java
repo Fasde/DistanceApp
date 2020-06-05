@@ -1,7 +1,8 @@
-package fasde.android.distanceapp.View;
+package fasde.android.distanceapp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -12,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import fasde.android.distanceapp.DataBase.Toolbox;
+import fasde.android.distanceapp.database.Toolbox;
 import fasde.android.distanceapp.R;
 
 public class ImpressumActivity extends AppCompatActivity {
@@ -110,6 +111,8 @@ public class ImpressumActivity extends AppCompatActivity {
                         toastNow.show();startActivity(openKreisPick);
                         break;
                     }
+                    default:
+                        Log.println(Log.ERROR, "Fehler", "Irgendwas läuft hier strangerweise nicht.");
                 }
 
         }

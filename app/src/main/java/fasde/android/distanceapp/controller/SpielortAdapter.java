@@ -1,4 +1,4 @@
-package fasde.android.distanceapp.Controller;
+package fasde.android.distanceapp.controller;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.TestOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-import fasde.android.distanceapp.Model.Spielort;
+import fasde.android.distanceapp.model.Spielort;
 import fasde.android.distanceapp.R;
 
 /**
@@ -29,7 +29,6 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
 
     private Context context;
     private List<Spielort> spielortList;
-    private List<Spielort> filteredList;
     private List<Spielort> allDataList;
     private SpielortFilter filter;
 
@@ -41,7 +40,7 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
      * @param context
      * @param spielortList
      */
-    public SpielortAdapter(@NonNull Context context, @SuppressLint("SupportAnnotationUsage") @LayoutRes ArrayList<Spielort> spielortList) {
+    public SpielortAdapter(@NonNull Context context, @SuppressLint("SupportAnnotationUsage") @LayoutRes List<Spielort> spielortList) {
         super(context, 0, spielortList);
         this.context = context;
         this.spielortList = spielortList;
@@ -77,6 +76,7 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
      * @param parent
      * @return View
      */
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -87,7 +87,7 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
         Spielort ort = spielortList.get(position);
 
         TextView spielort = listItem.findViewById(R.id.textView_ort);
-        spielort.setText("\t" + ort.getSpielort());
+        spielort.setText("\t" + ort.getOrtsName());
 
         TextView km = listItem.findViewById(R.id.textView_km);
         km.setText(ort.getDistanz() + "km");
@@ -106,6 +106,7 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
      *
      * @return Filter
      */
+    @NotNull
     @Override
     public Filter getFilter() {
         if (filter == null) {
@@ -139,9 +140,9 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            filteredList = new ArrayList<>();
+            List<Spielort> filteredList = new ArrayList<>();
             for (Spielort ort : allDataList) {
-                if (ort.getSpielort().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                if (ort.getOrtsName().toLowerCase().contains(constraint.toString().toLowerCase())) {
                     filteredList.add(ort);
                 }
             }

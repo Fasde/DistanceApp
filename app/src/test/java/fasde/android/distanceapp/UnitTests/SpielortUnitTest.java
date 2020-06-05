@@ -2,8 +2,8 @@ package fasde.android.distanceapp.UnitTests;
 
 import org.junit.Test;
 
-import fasde.android.distanceapp.Model.Kreis;
-import fasde.android.distanceapp.Model.Spielort;
+import fasde.android.distanceapp.model.Kreis;
+import fasde.android.distanceapp.model.Spielort;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -13,7 +13,7 @@ public class SpielortUnitTest {
     @Test
     public void test_Spielort_AndGetters(){
         Spielort spielort = new Spielort("Ort", 42, Kreis.EL_MITTE, "Here");
-        assertEquals("Ort", spielort.getSpielort());
+        assertEquals("Ort", spielort.getOrtsName());
         assertEquals(42, spielort.getDistanz());
         assertEquals(42 * 2 * 0.30, spielort.getKosten().doubleValue(), 0.001);
         assertEquals(Kreis.EL_MITTE, spielort.getKreis());

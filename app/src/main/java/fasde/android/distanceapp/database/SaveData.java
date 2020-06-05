@@ -1,81 +1,69 @@
-package fasde.android.distanceapp.DataBase;
+package fasde.android.distanceapp.database;
+
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
-import fasde.android.distanceapp.Model.Kreis;
-import fasde.android.distanceapp.Model.Spielort;
+import fasde.android.distanceapp.model.Kreis;
+import fasde.android.distanceapp.model.Spielort;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class SaveData {
 
-    public HashMap<String, Spielort> fillVereine(String variante) {
+    public Map<String, Spielort> fillVereine(String variante) {
         HashMap<String, Spielort> vereine = new HashMap<>();
 
         switch (variante) {
             case "Alle Kreise":
-                for (Spielort ort : SaveData.gottaListEmAll()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
+                addSpielorte(vereine, SaveData.gottaListEmAll());
                 break;
             case "Emsland":
-                for (Spielort ort : SaveData.emslandMitte()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                for (Spielort ort : SaveData.emslandNord()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
-                for (Spielort ort : SaveData.emslandSued()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
+                addSpielorte(vereine, SaveData.emslandNord());
+                addSpielorte(vereine, SaveData.emslandMitte());
+                addSpielorte(vereine, SaveData.emslandSued());
                 break;
             case "EL-Nord":
-                for (Spielort ort : SaveData.emslandNord()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
+                addSpielorte(vereine, SaveData.emslandNord());
                 break;
             case "EL-Mitte":
-                for (Spielort ort : SaveData.emslandMitte()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
+                addSpielorte(vereine, SaveData.emslandMitte());
                 break;
             case "EL-Süd":
-                for (Spielort ort : SaveData.emslandSued()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
+                addSpielorte(vereine, SaveData.emslandSued());
                 break;
             case "Grafschaft":
-                for (Spielort ort : SaveData.grafschaft()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
+                addSpielorte(vereine, SaveData.grafschaft());
                 break;
             case "Cloppenburg":
-                for (Spielort ort : SaveData.cloppenburg()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
+                addSpielorte(vereine, SaveData.cloppenburg());
                 break;
             case "Ostfriesland":
-                for (Spielort ort : SaveData.ostfriesland()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
+                addSpielorte(vereine, SaveData.ostfriesland());
                 break;
             case "Osnabrück":
-                for (Spielort ort : SaveData.osnabrück()) {
-                    vereine.put(ort.getSpielort(), ort);
-                }
+                addSpielorte(vereine, SaveData.osnabrück());
                 break;
+            default:
+               Log.println(Log.ERROR, "Fehler", "Kein Kreis gewählt!");
         }
 
         return vereine;
     }
 
+    private void addSpielorte(Map<String, Spielort> vereine, List<Spielort> list){
+        for(Spielort ort : list){
+            vereine.put(ort.getOrtsName(), ort);
+        }
+    }
+
     public List<Kreis> listAllKreise() {
-        List<Kreis> kreisList = new ArrayList<>();
-        kreisList.addAll(Arrays.asList(Kreis.values()));
-        return kreisList;
+        return Arrays.asList(Kreis.values());
     }
 
     private List<Spielort> gottaListEmAll() {
@@ -84,9 +72,9 @@ public class SaveData {
         allPlaces.addAll(emslandMitte());
         allPlaces.addAll(emslandSued());
         allPlaces.addAll(grafschaft());
-        // allPlaces.addAll(cloppenburg());
-        // allPlaces.addAll(osnabrück());
-        // allPlaces.addAll(ostfriesland());
+        allPlaces.addAll(cloppenburg());
+        allPlaces.addAll(osnabrück());
+        allPlaces.addAll(ostfriesland());
         return allPlaces;
     }
 

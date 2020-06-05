@@ -1,4 +1,4 @@
-package fasde.android.distanceapp.View;
+package fasde.android.distanceapp.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import fasde.android.distanceapp.DataBase.SaveData;
-import fasde.android.distanceapp.DataBase.Toolbox;
-import fasde.android.distanceapp.Model.Kreis;
+import fasde.android.distanceapp.database.SaveData;
+import fasde.android.distanceapp.database.Toolbox;
+import fasde.android.distanceapp.model.Kreis;
 import fasde.android.distanceapp.R;
 
 /**
@@ -95,21 +95,17 @@ public class KreisPickActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Impressum: {
-                Intent openImpressum = new Intent(KreisPickActivity.this, ImpressumActivity.class).putExtra("PrevClass", "KreisPick");
-                Toolbox.killAllToasts();
-                toastNow = Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT);
-                toastNow.show();
-                startActivity(openImpressum);
-                break;
-            }
-            case android.R.id.home: {
-                Toolbox.killAllToasts();
-                toastNow = Toast.makeText(this, "Schließe...", Toast.LENGTH_SHORT);
-                toastNow.show();
-                break;
-            }
+        int itemId = item.getItemId();
+        if (itemId == R.id.Impressum) {
+            Intent openImpressum = new Intent(KreisPickActivity.this, ImpressumActivity.class).putExtra("PrevClass", "KreisPick");
+            Toolbox.killAllToasts();
+            toastNow = Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT);
+            toastNow.show();
+            startActivity(openImpressum);
+        } else if (itemId == android.R.id.home) {
+            Toolbox.killAllToasts();
+            toastNow = Toast.makeText(this, "Schließe...", Toast.LENGTH_SHORT);
+            toastNow.show();
         }
         return super.onOptionsItemSelected(item);
     }
