@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DistanceApp</string>
     <string name="display_name">Spielort-Distanz</string>
-    <string name="version">1.11.0</string>
+    <string name="version">1.11.3</string>
     <string name="edit_text_hint">Suche nach String</string>
     <string name="impressum">Impressum</string>
     <string name="detailHeader">Zweck und Inhalt:</string>

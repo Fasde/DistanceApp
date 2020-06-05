@@ -11,29 +11,30 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/textView_km"
+        android:id="@+id/textView_anschrift"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView_ort"
-        android:layout_margin="20dp"
-        android:textSize="20sp"/>
+        android:layout_marginStart="20dp"
+        android:textSize="20sp"
+        android:layout_below="@id/textView_ort"/>
 
     <TextView
-        android:id="@+id/textView_kosten"
+        android:id="@+id/textView_strasse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
         android:textSize="20sp"
-        android:layout_below="@id/textView_ort"
-        android:layout_toRightOf="@id/textView_km"/>
+        android:layout_below="@id/textView_anschrift"/>
 
     <TextView
         android:id="@+id/textView_kreis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:textSize="20sp"
-        android:layout_below="@id/textView_ort"
-        android:layout_toRightOf="@id/textView_kosten"/>
+        android:layout_below="@id/textView_strasse"/>
+
 
 </RelativeLayout>

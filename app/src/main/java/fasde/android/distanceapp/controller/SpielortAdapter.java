@@ -89,11 +89,11 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
         TextView spielort = listItem.findViewById(R.id.textView_ort);
         spielort.setText("\t" + ort.getOrtsName());
 
-        TextView km = listItem.findViewById(R.id.textView_km);
-        km.setText(ort.getDistanz() + "km");
+        TextView anschrift = listItem.findViewById(R.id.textView_anschrift);
+        anschrift.setText(ort.toStringArray()[4]);
 
-        TextView kosten = listItem.findViewById(R.id.textView_kosten);
-        kosten.setText(ort.getKosten().toString() + "€");
+        TextView strasse = listItem.findViewById(R.id.textView_strasse);
+        strasse.setText(ort.toStringArray()[5]);
 
         TextView kreis = listItem.findViewById(R.id.textView_kreis);
         kreis.setText(ort.getKreis().getName());

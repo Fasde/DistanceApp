@@ -42,6 +42,6 @@ public class Spielort {
 
     public String[] toStringArray() {
         String[] adress = this.getAdresse().split(",");
-        return new String[]{this.getOrtsName(), Integer.toString(this.getDistanz()), this.kosten.toString(), this.getKreis().getName(), adress[0], adress[1]};
+        return new String[]{this.getOrtsName(), Integer.toString(this.getDistanz()), this.kosten.toString(), this.getKreis().getName(), adress[0], adress[1].substring(1)};
     }
 }
