@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.GeoActivity"
+    android:orientation="vertical">
+
+    <Switch
+        android:id="@+id/switchCustomHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/aktuellen_standort_verwenden"
+        android:checked="true"
+        android:layout_marginTop="300dp"
+        android:layout_marginHorizontal="80dp"/>
+
+    <EditText
+        android:id="@+id/textCustomHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_below="@+id/switchCustomHome"
+        android:layout_marginHorizontal="50dp"
+        android:width="300dp"
+        android:visibility="invisible"
+        android:hint="@string/hier_den_eigenen_ort_eingeben"/>
+
+    <Button
+        android:id="@+id/submitCustomHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="40dp"
+        android:text="@string/ort_ausw_hlen"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        />
+
+
+
+</RelativeLayout>

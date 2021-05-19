@@ -137,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
             toastNow = Toast.makeText(this, "Schließe Liste des Kreises...", Toast.LENGTH_SHORT);
             toastNow.show();
             startActivity(openKreisPick);
+        } else if (itemId == R.id.AktOrt) {
+            Intent setOrt = new Intent(MainActivity.this, GeoActivity.class);
+            Toolbox.killAllToasts();
+            startActivity(setOrt);
         }
         return super.onOptionsItemSelected(item);
     }

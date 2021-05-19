@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DistanceApp</string>
     <string name="display_name">Spielort-Distanz</string>
-    <string name="version">1.11.3</string>
+    <string name="version">2.0</string>
     <string name="edit_text_hint">Suche nach String</string>
     <string name="impressum">Impressum</string>
     <string name="detailHeader">Zweck und Inhalt:</string>
@@ -14,4 +14,8 @@
     <string name="authorString3">\n\nOrt: 48155 Münster\nStraße: Dortmunder Str. 12\n\nMobil: 01747336157</string>
     <string name="codeHeader">Code:</string>
     <string name="codeAdress">https://github.com/Fasde/DistanceApp</string>
+    <string name="aktueller_ort">Aktueller Ort</string>
+    <string name="aktuellen_standort_verwenden">Aktuellen Standort verwenden</string>
+    <string name="hier_den_eigenen_ort_eingeben">Ort, Adresse</string>
+    <string name="ort_ausw_hlen">Ort auswählen</string>
 </resources>

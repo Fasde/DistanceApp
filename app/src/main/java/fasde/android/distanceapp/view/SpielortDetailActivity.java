@@ -12,8 +12,24 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
+
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Arrays;
+
 import fasde.android.distanceapp.R;
 import fasde.android.distanceapp.database.Toolbox;
+import fasde.android.distanceapp.geo.Geo;
 import fasde.android.distanceapp.model.Spielort;
 
 /**
@@ -24,6 +40,8 @@ public class SpielortDetailActivity extends AppCompatActivity {
     private static Spielort aktuellerSpielort;
     private static Toast toastNow;
     String[] spielortArray;
+    RequestQueue queue;
+    String geoString;
 
     public static void setAktuellerSpielort(Spielort spielort) {
         aktuellerSpielort = spielort;
@@ -49,25 +67,52 @@ public class SpielortDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        Geo.destCords = aktuellerSpielort.getGeoString();
+
         TextView ortView = findViewById(R.id.detail_ort);
-        TextView distanzView = findViewById(R.id.detail_km);
-        TextView kostenView = findViewById(R.id.detail_kosten);
         TextView kreisView = findViewById(R.id.detail_kreis);
         TextView adresseView = findViewById(R.id.detail_adresse);
 
+        geoString = aktuellerSpielort.getGeoString();
         spielortArray = aktuellerSpielort.toStringArray();
 
+        queue = Volley.newRequestQueue(this);
+        request();
+
         String ortString = "\t" + spielortArray[0];
-        String distanzString = "Distanz: \n\t\t" + spielortArray[1] + "km pro Strecke";
-        String kostenString = "Fahrtkosten: \n\t\t " + spielortArray[2] + "€";
-        String kreisString = "Kreis: \n\t\t " + spielortArray[3];
-        String adresseString = "Adresse: \n\t\t " + spielortArray[4] + "\n\t\t" + spielortArray[5];
+        String kreisString = "Kreis: \n\t\t " + spielortArray[1];
+        String adresseString = "Adresse: \n\t\t " + spielortArray[2] + "\n\t\t" + spielortArray[3];
 
         ortView.setText(ortString);
-        distanzView.setText(distanzString);
-        kostenView.setText(kostenString);
         kreisView.setText(kreisString);
         adresseView.setText(adresseString);
+    }
+
+    private void request() {
+        String url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248b2d893fc69e7408c85550ae302e3b97d&start="+Geo.homeCords+"&end="+Geo.destCords;
+        JsonObjectRequest req2 = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+           try{
+               JSONObject object = response.getJSONArray("features").getJSONObject(0).getJSONObject("properties").getJSONObject("summary");
+               setTexts(object.get("duration").toString(), object.get("distance").toString());
+           } catch (Exception e){
+               e.printStackTrace();
+           }
+        }, error -> {Toast.makeText(this, "Fehler", Toast.LENGTH_LONG).show();
+            System.out.println(Arrays.toString(error.getStackTrace()));});
+        queue.add(req2);
+    }
+
+    private void setTexts(String duration, String distance){
+        TextView distanzView = findViewById(R.id.detail_km);
+        TextView kostenView = findViewById(R.id.detail_kosten);
+        Double d = Double.parseDouble(distance);
+        d /= 1000;
+        int i = d.intValue();
+        String distanzString = "Distanz: \n\t\t" + i + "km pro Strecke";
+        distanzView.setText(distanzString);
+        BigDecimal bd = BigDecimal.valueOf(i * 0.30 * 2).setScale(2, RoundingMode.HALF_DOWN);
+        String kostenString = "Fahrtkosten: \n\t\t " + bd.toString() + "€";
+        kostenView.setText(kostenString);
     }
 
     /**
@@ -102,6 +147,10 @@ public class SpielortDetailActivity extends AppCompatActivity {
             toastNow = Toast.makeText(this, "Schließe Detailansicht...", Toast.LENGTH_SHORT);
             toastNow.show();
             startActivity(openMain);
+        } else if (item.getItemId() == R.id.AktOrt) {
+            Intent setOrt = new Intent(SpielortDetailActivity.this, GeoActivity.class);
+            Toolbox.killAllToasts();
+            startActivity(setOrt);
         }
         return super.onOptionsItemSelected(item);
     }

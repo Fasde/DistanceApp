@@ -90,10 +90,10 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
         spielort.setText("\t" + ort.getOrtsName());
 
         TextView anschrift = listItem.findViewById(R.id.textView_anschrift);
-        anschrift.setText(ort.toStringArray()[4]);
+        anschrift.setText(ort.toStringArray()[2]);
 
         TextView strasse = listItem.findViewById(R.id.textView_strasse);
-        strasse.setText(ort.toStringArray()[5]);
+        strasse.setText(ort.toStringArray()[3]);
 
         TextView kreis = listItem.findViewById(R.id.textView_kreis);
         kreis.setText(ort.getKreis().getName());

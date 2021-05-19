@@ -62,16 +62,13 @@ public class KreisPickActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, picks);
         listView.setAdapter(arrayAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent openListView = new Intent(KreisPickActivity.this, MainActivity.class);
-                MainActivity.setAktuellerKreis((String) listView.getItemAtPosition(position));
-                Toolbox.killAllToasts();
-                toastNow = Toast.makeText(context, "Öffne Spielort-Liste des gewählten Kreises...", Toast.LENGTH_SHORT);
-                toastNow.show();
-                startActivity(openListView);
-            }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent openListView = new Intent(KreisPickActivity.this, MainActivity.class);
+            MainActivity.setAktuellerKreis((String) listView.getItemAtPosition(position));
+            Toolbox.killAllToasts();
+            toastNow = Toast.makeText(context, "Öffne Spielort-Liste des gewählten Kreises...", Toast.LENGTH_SHORT);
+            toastNow.show();
+            startActivity(openListView);
         });
     }
 
@@ -106,6 +103,10 @@ public class KreisPickActivity extends AppCompatActivity {
             Toolbox.killAllToasts();
             toastNow = Toast.makeText(this, "Schließe...", Toast.LENGTH_SHORT);
             toastNow.show();
+        } else if (itemId == R.id.AktOrt) {
+            Intent setOrt = new Intent(KreisPickActivity.this, GeoActivity.class);
+            Toolbox.killAllToasts();
+            startActivity(setOrt);
         }
         return super.onOptionsItemSelected(item);
     }

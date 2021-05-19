@@ -114,6 +114,10 @@ public class ImpressumActivity extends AppCompatActivity {
                     default:
                         Log.println(Log.ERROR, "Fehler", "Irgendwas läuft hier strangerweise nicht.");
                 }
+            case R.id.AktOrt:
+                Intent setOrt = new Intent(ImpressumActivity.this, GeoActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(setOrt);
 
         }
         return super.onOptionsItemSelected(item);
