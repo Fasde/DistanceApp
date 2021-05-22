@@ -54,7 +54,6 @@ public class KreisPickActivity extends AppCompatActivity {
 
         List<String> picks = new ArrayList<>();
         picks.add("Alle Kreise");
-        picks.add("Emsland");
         for (Kreis kreis : SaveData.listAllKreise()) {
             picks.add(kreis.getName());
         }

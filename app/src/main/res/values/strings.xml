@@ -2,14 +2,14 @@
     <string name="app_name">DistanceApp</string>
     <string name="display_name">Spielort-Distanz</string>
     <string name="version">2.0</string>
-    <string name="edit_text_hint">Suche nach String</string>
+    <string name="edit_text_hint">Suche nach Spielort</string>
     <string name="impressum">Impressum</string>
     <string name="detailHeader">Zweck und Inhalt:</string>
     <string name="detail">Diese App wurde geschaffen, um eine kleine, nette, und vor allem selbstprogrammierte Hilfe zu sein, um die Spritkosten und Fahrtweiten, sowie die Adressen der Fußballplätze im Bezirk Weser-Ems, vor allem des Emslands, zu sein.</string>
     <string name="versionHeader">App-Informationen:</string>
     <string name="versionString">, Version: </string>
     <string name="authorHeader">Autor:</string>
-    <string name="authorString1">Name: Fabian Poker (Fasde)</string>
+    <string name="authorString1">Name: Fabian Poker</string>
     <string name="authorString2"> (</string>
     <string name="authorString3">\n\nOrt: 48155 Münster\nStraße: Dortmunder Str. 12\n\nMobil: 01747336157</string>
     <string name="codeHeader">Code:</string>

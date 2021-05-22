@@ -40,7 +40,7 @@ public class KreisUnitTest {
 
     @Test
     public void test_getForName_Osnabrueck() {
-        assertEquals(Kreis.OSNA, Kreis.getForName("Osnabrück"));
+        assertEquals(Kreis.OSNA_L, Kreis.getForName("Osnabrück-Land"));
     }
 
     @Test

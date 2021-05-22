@@ -142,7 +142,7 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
             FilterResults results = new FilterResults();
             List<Spielort> filteredList = new ArrayList<>();
             for (Spielort ort : allDataList) {
-                if (ort.getOrtsName().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                if (ort.getOrtsName().toLowerCase().contains(constraint.toString().toLowerCase()) || ort.getAdresse().toLowerCase().contains(constraint.toString().toLowerCase())) {
                     filteredList.add(ort);
                 }
             }

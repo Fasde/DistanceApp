@@ -6,13 +6,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Kreis {
 
-    EL_NORD("EL-Nord", "NFV"),
-    EL_MITTE("EL-Mitte", "NFV"),
-    EL_SUED("EL-Süd", "NFV"),
+    EL("Emsland", "NFV"),
     GRAFSCHAFT("Grafschaft", "NFV"),
     OSTFRIESLAND("Ostfriesland", "NFV"),
     CLP("Cloppenburg", "NFV"),
-    OSNA("Osnabrück", "NFV");
+    OSNA_L("Osnabrück-Land", "NFV"),
+    OSNA_S("Osnabrück-Stadt", "NFV"),
+    VECHTA("Vechta", "NFV"),
+    OLDE("Oldenburg", "NFV"),
+    JWH("Jade-Weser-Hunte", "NFV");
 
     @Getter
     String name;
