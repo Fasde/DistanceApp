@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import fasde.android.distanceapp.database.Toolbox;
+import fasde.android.distanceapp.controller.Toolbox;
 import fasde.android.distanceapp.R;
 
 public class ImpressumActivity extends AppCompatActivity {
@@ -97,7 +97,7 @@ public class ImpressumActivity extends AppCompatActivity {
                         break;
                     }
                     case "Main": {
-                        Intent openMain = new Intent(ImpressumActivity.this, MainActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
+                        Intent openMain = new Intent(ImpressumActivity.this, ListViewActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
                         Toolbox.killAllToasts();
                         toastNow = Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT);
                         toastNow.show();

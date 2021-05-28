@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fasde.android.distanceapp.database.SaveData;
-import fasde.android.distanceapp.database.Toolbox;
+import fasde.android.distanceapp.controller.Toolbox;
 import fasde.android.distanceapp.model.Kreis;
 import fasde.android.distanceapp.R;
 
@@ -62,8 +60,8 @@ public class KreisPickActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent openListView = new Intent(KreisPickActivity.this, MainActivity.class);
-            MainActivity.setAktuellerKreis((String) listView.getItemAtPosition(position));
+            Intent openListView = new Intent(KreisPickActivity.this, ListViewActivity.class);
+            ListViewActivity.setAktuellerKreis((String) listView.getItemAtPosition(position));
             Toolbox.killAllToasts();
             toastNow = Toast.makeText(context, "Öffne Spielort-Liste des gewählten Kreises...", Toast.LENGTH_SHORT);
             toastNow.show();

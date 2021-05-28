@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:backgroundTint="#E6FFFFFF"
     android:orientation="vertical"
-    tools:context="fasde.android.distanceapp.view.MainActivity">
+    tools:context="fasde.android.distanceapp.view.ListViewActivity">
 
     <ListView
         android:id="@+id/pickList"

@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="fasde.android.distanceapp.view.MainActivity">
+    android:background="@drawable/bg"
+    android:backgroundTint="#E6FFFFFF"
+    tools:context="fasde.android.distanceapp.view.ListViewActivity">
 
     <EditText android:id="@+id/inputSearch"
         android:layout_width="fill_parent"

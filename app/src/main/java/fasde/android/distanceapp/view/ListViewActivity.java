@@ -24,14 +24,14 @@ import java.util.TreeMap;
 
 import fasde.android.distanceapp.controller.SpielortAdapter;
 import fasde.android.distanceapp.database.SaveData;
-import fasde.android.distanceapp.database.Toolbox;
+import fasde.android.distanceapp.controller.Toolbox;
 import fasde.android.distanceapp.model.Spielort;
 import fasde.android.distanceapp.R;
 
 /**
  * Creates a Activity about a ListView of Spielorts.
  */
-public class MainActivity extends AppCompatActivity {
+public class ListViewActivity extends AppCompatActivity {
 
     private static String aktuellerKreis;
     private static Toast toastNow;
@@ -50,12 +50,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_listview);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        this.setTitle(aktuellerKreis);
 
         listView = findViewById(R.id.list);
         editText = findViewById(R.id.inputSearch);
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainActivity.this.spielortAdapter.getFilter().filter(s);
+                ListViewActivity.this.spielortAdapter.getFilter().filter(s);
             }
 
             @Override
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent openDetail = new Intent(MainActivity.this, SpielortDetailActivity.class);
+                Intent openDetail = new Intent(ListViewActivity.this, SpielortDetailActivity.class);
                 SpielortDetailActivity.setAktuellerSpielort((Spielort) listView.getItemAtPosition(position));
                 Toolbox.killAllToasts();
                 toastNow = Toast.makeText(context, "Öffne gewählten Spielort...", Toast.LENGTH_SHORT);
@@ -126,19 +128,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.Impressum) {
-            Intent openImpressum = new Intent(MainActivity.this, ImpressumActivity.class).putExtra("PrevClass", "Main");
+            Intent openImpressum = new Intent(ListViewActivity.this, ImpressumActivity.class).putExtra("PrevClass", "Main");
             Toolbox.killAllToasts();
             toastNow = Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT);
             toastNow.show();
             startActivity(openImpressum);
         } else if (itemId == android.R.id.home) {
-            Intent openKreisPick = new Intent(MainActivity.this, KreisPickActivity.class);
+            Intent openKreisPick = new Intent(ListViewActivity.this, KreisPickActivity.class);
             Toolbox.killAllToasts();
             toastNow = Toast.makeText(this, "Schließe Liste des Kreises...", Toast.LENGTH_SHORT);
             toastNow.show();
             startActivity(openKreisPick);
         } else if (itemId == R.id.AktOrt) {
-            Intent setOrt = new Intent(MainActivity.this, GeoActivity.class);
+            Intent setOrt = new Intent(ListViewActivity.this, GeoActivity.class);
             Toolbox.killAllToasts();
             startActivity(setOrt);
         }

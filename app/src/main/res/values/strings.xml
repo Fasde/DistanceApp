@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">DistanceApp</string>
     <string name="display_name">Spielort-Distanz</string>
-    <string name="version">2.0.1</string>
-    <string name="edit_text_hint">Suche nach Spielort</string>
+    <string name="version">2.1.0</string>
+    <string name="edit_text_hint">Suche nach Spielort oder Adresse</string>
     <string name="impressum">Impressum</string>
     <string name="detailHeader">Zweck und Inhalt:</string>
     <string name="detail">Diese App wurde geschaffen, um eine kleine, nette, und vor allem selbstprogrammierte Hilfe zu sein, um die Spritkosten und Fahrtweiten, sowie die Adressen der Fußballplätze im Bezirk Weser-Ems, vor allem des Emslands, zu sein.</string>
@@ -18,4 +18,10 @@
     <string name="aktuellen_standort_verwenden">Aktuellen Standort verwenden</string>
     <string name="hier_den_eigenen_ort_eingeben">Ort, Adresse</string>
     <string name="ort_ausw_hlen">Ort auswählen</string>
+    <string name="ort_in_maps_anzeigen">Ort in Maps anzeigen</string>
+    <string name="distanz">Distanz:</string>
+    <string name="gesch_tzte_fahrtdauer">Geschätzte Fahrtdauer:</string>
+    <string name="kreis">Kreis:</string>
+    <string name="adresse">Adresse:</string>
+    <string name="fahrtkosten">Fahrtkosten:</string>
 </resources>

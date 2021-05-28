@@ -1,9 +1,11 @@
 package fasde.android.distanceapp.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,11 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
 
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
@@ -28,7 +26,7 @@ import java.math.RoundingMode;
 import java.util.Arrays;
 
 import fasde.android.distanceapp.R;
-import fasde.android.distanceapp.database.Toolbox;
+import fasde.android.distanceapp.controller.Toolbox;
 import fasde.android.distanceapp.geo.Geo;
 import fasde.android.distanceapp.model.Spielort;
 
@@ -69,9 +67,10 @@ public class SpielortDetailActivity extends AppCompatActivity {
 
         Geo.destCords = aktuellerSpielort.getGeoString();
 
-        TextView ortView = findViewById(R.id.detail_ort);
+        TextView spielortView = findViewById(R.id.detail_ort);
         TextView kreisView = findViewById(R.id.detail_kreis);
-        TextView adresseView = findViewById(R.id.detail_adresse);
+        TextView ortView = findViewById(R.id.detail_adresse_ort);
+        TextView strasseView = findViewById(R.id.detail_adresse_strasse);
 
         geoString = aktuellerSpielort.getGeoString();
         spielortArray = aktuellerSpielort.toStringArray();
@@ -79,13 +78,25 @@ public class SpielortDetailActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         request();
 
-        String ortString = "\t" + spielortArray[0];
-        String kreisString = "Kreis: \n\t\t " + spielortArray[1];
-        String adresseString = "Adresse: \n\t\t" + spielortArray[2] + "\n\t\t" + spielortArray[3];
+        String spielortString = spielortArray[0];
+        String kreisString = spielortArray[1];
+        String ortString = spielortArray[2];
+        String strasseString = spielortArray[3];
 
-        ortView.setText(ortString);
+        this.setTitle(spielortString);
+
+        spielortView.setText(spielortString);
         kreisView.setText(kreisString);
-        adresseView.setText(adresseString);
+        ortView.setText(ortString);
+        strasseView.setText(strasseString);
+
+        Button mapsButton = findViewById(R.id.toMaps);
+        mapsButton.setOnClickListener(view -> {
+            Uri mapsIntentUri = Uri.parse("geo:0,0?q="+ortString+","+strasseString);
+            Intent mapsIntent = new Intent(Intent.ACTION_VIEW, mapsIntentUri);
+            mapsIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapsIntent);
+        });
     }
 
     private void request() {
@@ -105,13 +116,16 @@ public class SpielortDetailActivity extends AppCompatActivity {
     private void setTexts(String duration, String distance){
         TextView distanzView = findViewById(R.id.detail_km);
         TextView kostenView = findViewById(R.id.detail_kosten);
+        TextView dauerView = findViewById(R.id.detail_duration);
         Double d = Double.parseDouble(distance);
         d /= 1000;
         int i = d.intValue();
-        String distanzString = "Distanz: \n\t\t" + i + "km pro Strecke";
+        String distanzString = i + "km pro Strecke";
         distanzView.setText(distanzString);
+        String durString = ((int)(Double.parseDouble(duration)/60d)) + " Minuten";
+        dauerView.setText(durString);
         BigDecimal bd = BigDecimal.valueOf(i * 0.30 * 2).setScale(2, RoundingMode.HALF_DOWN);
-        String kostenString = "Fahrtkosten: \n\t\t " + bd.toString() + "€";
+        String kostenString = bd.toString() + "€";
         kostenView.setText(kostenString);
     }
 
@@ -142,7 +156,7 @@ public class SpielortDetailActivity extends AppCompatActivity {
             toastNow.show();
             startActivity(openImpressum);
         } else if (item.getItemId() == android.R.id.home) {
-            Intent openMain = new Intent(SpielortDetailActivity.this, MainActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
+            Intent openMain = new Intent(SpielortDetailActivity.this, ListViewActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
             Toolbox.killAllToasts();
             toastNow = Toast.makeText(this, "Schließe Detailansicht...", Toast.LENGTH_SHORT);
             toastNow.show();

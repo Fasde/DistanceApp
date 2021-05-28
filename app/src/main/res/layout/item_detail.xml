@@ -3,46 +3,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:backgroundTint="#E6FFFFFF"
     android:orientation="vertical"
     tools:context=".view.SpielortDetailActivity">
+
 
     <TextView
         android:id="@+id/detail_ort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
         android:textSize="30sp"
         android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/detail_km_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_ort"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/distanz"/>
 
     <TextView
         android:id="@+id/detail_km"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/detail_ort"
-        android:layout_margin="20dp"
+        android:layout_below="@id/detail_km_header"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/detail_duration_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_km"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/gesch_tzte_fahrtdauer"/>
+
+    <TextView
+        android:id="@+id/detail_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_duration_header"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/detail_kosten_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/detail_duration"
+        android:text="@string/fahrtkosten"/>
 
     <TextView
         android:id="@+id/detail_kosten"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
         android:textSize="20sp"
-        android:layout_below="@id/detail_km"/>
+        android:layout_below="@id/detail_kosten_header"/>
+
+    <TextView
+        android:id="@+id/detail_kreis_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/detail_kosten"
+        android:text="@string/kreis"/>
 
     <TextView
         android:id="@+id/detail_kreis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
         android:textSize="20sp"
-        android:layout_below="@id/detail_kosten"/>
+        android:layout_below="@id/detail_kreis_header"/>
 
     <TextView
-        android:id="@+id/detail_adresse"
+        android:id="@+id/detail_adresse_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
         android:textSize="20sp"
-        android:layout_below="@id/detail_kreis"/>
+        android:textStyle="bold"
+        android:layout_below="@id/detail_kreis"
+        android:text="@string/adresse"/>
+
+    <TextView
+        android:id="@+id/detail_adresse_ort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="20sp"
+        android:layout_below="@id/detail_adresse_header"/>
+
+    <TextView
+        android:id="@+id/detail_adresse_strasse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="20sp"
+        android:layout_below="@id/detail_adresse_ort"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toMaps"
+        android:gravity="bottom|end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:text="@string/ort_in_maps_anzeigen"
+        />
 
 </RelativeLayout>

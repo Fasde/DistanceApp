@@ -87,7 +87,7 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
         Spielort ort = spielortList.get(position);
 
         TextView spielort = listItem.findViewById(R.id.textView_ort);
-        spielort.setText("\t" + ort.getOrtsName());
+        spielort.setText(ort.getOrtsName());
 
         TextView anschrift = listItem.findViewById(R.id.textView_anschrift);
         anschrift.setText(ort.toStringArray()[2]);
@@ -142,7 +142,9 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
             FilterResults results = new FilterResults();
             List<Spielort> filteredList = new ArrayList<>();
             for (Spielort ort : allDataList) {
-                if (ort.getOrtsName().toLowerCase().contains(constraint.toString().toLowerCase()) || ort.getAdresse().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                boolean condition1 = ort.getOrtsName().toLowerCase().contains(constraint.toString().toLowerCase());
+                boolean condition2 = ort.getAdresse().toLowerCase().contains(constraint.toString().toLowerCase());
+                if (condition1 || condition2) {
                     filteredList.add(ort);
                 }
             }

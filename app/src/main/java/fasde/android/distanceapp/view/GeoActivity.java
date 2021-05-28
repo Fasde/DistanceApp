@@ -1,19 +1,21 @@
 package fasde.android.distanceapp.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,18 +25,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import fasde.android.distanceapp.database.Toolbox;
+import fasde.android.distanceapp.controller.Toolbox;
 import fasde.android.distanceapp.R;
 import fasde.android.distanceapp.geo.Geo;
 
@@ -47,11 +48,11 @@ public class GeoActivity extends AppCompatActivity {
     Button submitCustomHome;
 
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geo);
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -63,6 +64,10 @@ public class GeoActivity extends AppCompatActivity {
 
         switchCustomHome.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
+                getGeoPermission();
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
+                    return;
+                }
                 textCustomHome.setVisibility(View.INVISIBLE);
             } else {
                 textCustomHome.setVisibility(View.VISIBLE);
@@ -87,9 +92,30 @@ public class GeoActivity extends AppCompatActivity {
 
     }
 
+    private void getGeoPermission(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Der aktuelle Standort kann verwendet werden.", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(this, "GPS-Berechtigung wird benötigt, um den aktuellen Standort zu verwenden.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
     private void getCurrentLocation() {
         LocationManager loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
         Location location = loc.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(location == null) return;
@@ -157,7 +183,7 @@ public class GeoActivity extends AppCompatActivity {
                         break;
                     }
                     case "Main": {
-                        Intent openMain = new Intent(GeoActivity.this, MainActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
+                        Intent openMain = new Intent(GeoActivity.this, ListViewActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
                         Toolbox.killAllToasts();
                         toastNow = Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT);
                         toastNow.show();
