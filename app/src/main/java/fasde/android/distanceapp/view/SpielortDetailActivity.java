@@ -81,7 +81,7 @@ public class SpielortDetailActivity extends AppCompatActivity {
 
         String ortString = "\t" + spielortArray[0];
         String kreisString = "Kreis: \n\t\t " + spielortArray[1];
-        String adresseString = "Adresse: \n\t\t " + spielortArray[2] + "\n\t\t" + spielortArray[3];
+        String adresseString = "Adresse: \n\t\t" + spielortArray[2] + "\n\t\t" + spielortArray[3];
 
         ortView.setText(ortString);
         kreisView.setText(kreisString);

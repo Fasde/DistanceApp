@@ -10,8 +10,7 @@ public enum Kreis {
     GRAFSCHAFT("Grafschaft", "NFV"),
     OSTFRIESLAND("Ostfriesland", "NFV"),
     CLP("Cloppenburg", "NFV"),
-    OSNA_L("Osnabrück-Land", "NFV"),
-    OSNA_S("Osnabrück-Stadt", "NFV"),
+    OSNA("Osnabrück", "NFV"),
     VECHTA("Vechta", "NFV"),
     OLDE("Oldenburg", "NFV"),
     JWH("Jade-Weser-Hunte", "NFV");

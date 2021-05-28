@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DistanceApp</string>
     <string name="display_name">Spielort-Distanz</string>
-    <string name="version">2.0</string>
+    <string name="version">2.0.1</string>
     <string name="edit_text_hint">Suche nach Spielort</string>
     <string name="impressum">Impressum</string>
     <string name="detailHeader">Zweck und Inhalt:</string>
@@ -11,7 +11,7 @@
     <string name="authorHeader">Autor:</string>
     <string name="authorString1">Name: Fabian Poker</string>
     <string name="authorString2"> (</string>
-    <string name="authorString3">\n\nOrt: 48155 Münster\nStraße: Dortmunder Str. 12\n\nMobil: 01747336157</string>
+    <string name="authorString3">\n\nOrt: 48155 Münster\nStraße: Dortmunder Str. 12\n\nMail: fabianpoker1@web.de</string>
     <string name="codeHeader">Code:</string>
     <string name="codeAdress">https://github.com/Fasde/DistanceApp</string>
     <string name="aktueller_ort">Aktueller Ort</string>
