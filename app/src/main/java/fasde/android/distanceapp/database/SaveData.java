@@ -35,7 +35,7 @@ public class SaveData {
                 addSpielorte(vereine, SaveData.ostfriesland());
                 break;
             case "Osnabrück":
-                addSpielorte(vereine, SaveData.osnabrück());
+                addSpielorte(vereine, SaveData.osnabrueck());
 
             case "Vechta":
                 addSpielorte(vereine, SaveData.vechta());
@@ -64,7 +64,7 @@ public class SaveData {
         allPlaces.addAll(emsland());
         allPlaces.addAll(grafschaft());
         allPlaces.addAll(cloppenburg());
-        allPlaces.addAll(osnabrück());
+        allPlaces.addAll(osnabrueck());
         allPlaces.addAll(ostfriesland());
         allPlaces.addAll(vechta());
         allPlaces.addAll(oldenburg());
@@ -441,7 +441,7 @@ public class SaveData {
         return cloppenburg;
     }
 
-    private List<Spielort> osnabrück() {
+    private List<Spielort> osnabrueck() {
         List<Spielort> osna = new ArrayList<>();
         osna.add(new Spielort("Westerwiede", Kreis.OSNA, "49196 Bad Laer, In den Höfen 1", "8.062223479039421,52.1132464621076"));
         osna.add(new Spielort("Bramsche (1.FCR)", Kreis.OSNA, "49565 Bramsche, Jahnstraße 17", "7.997582698541004,52.408872128153575"));
@@ -501,30 +501,30 @@ public class SaveData {
         osna.add(new Spielort("Ohrbeck", Kreis.OSNA, "49205 Hasbergen, Holzhausener Straße 60", "7.995551540836322,52.231319994038074"));
         osna.add(new Spielort("Ankum", Kreis.OSNA, "49577 Ankum, Bippener Straße", "7.8576076715597685,52.547478076813086"));
         osna.add(new Spielort("Georgsmarienhütte (SV Viktoria)", Kreis.OSNA, "49124 Georgsmarienhütte, Auf dem Rehlberg 1", "8.043145521818383,52.201385735547326"));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
-//        osna.add(new Spielort("", Kreis.OSNA, "", ""));
+        osna.add(new Spielort("Gesmold", Kreis.OSNA, "49326 Melle, An der Else 1", "8.2681942758869,52.212260007320054"));
+        osna.add(new Spielort("Wimmer", Kreis.OSNA, "49152 Bad Essen, Klüferstraße 16", "8.43199854017779,52.32915964973914"));
+        osna.add(new Spielort("Wissingen", Kreis.OSNA, "49143 Bissendorf, Heideweg 1", "8.210523644420801,52.26392866341777"));
+        osna.add(new Spielort("Oldendorf", Kreis.OSNA, "49324 Melle, Am Grönegausee 1", "8.316011455516607,52.23601539568131"));
+        osna.add(new Spielort("Dissen", Kreis.OSNA, "49201 Dissen, Mühlenstraße 14-24", "8.2012450150845,52.11927524264607"));
+        osna.add(new Spielort("Riemsloh", Kreis.OSNA, "49328 Melle, Jahnstrße 6", "8.41924180550668,52.183003681190215"));
+        osna.add(new Spielort("Ueffeln", Kreis.OSNA, "49565 Bramsche, Am Sportplatz 9", "7.873487728541561,52.44897882974624"));
+        osna.add(new Spielort("Venne", Kreis.OSNA, "49179 Ostercappeln, Am Mühlenbach 20", "8.16791825476586,52.38954269443093"));
+        osna.add(new Spielort("Wallenhorst", Kreis.OSNA, "49134 Wallenhorst, Mirower Straße 1", "8.009802134945465,52.35078450547349"));
+        osna.add(new Spielort("Westerhausen-Föckinghausen", Kreis.OSNA, "49324 Melle, Ebbegerweg 1", "8.288119670372293,52.249555200325126"));
+        osna.add(new Spielort("Bad Essen (TuS)", Kreis.OSNA, "49152 Bad Essen, Aßbruchweg 18", "8.332674999176893,52.3241144139254"));
+        osna.add(new Spielort("Badbergen", Kreis.OSNA, "49635 Badbergen, Matschenstraße 8", "7.976793048255087,52.63736918578135"));
+        osna.add(new Spielort("Berge", Kreis.OSNA, "49626 Berge, Upberg 12", "7.73487417567701,52.60772003901742"));
+        osna.add(new Spielort("Bersenbrück", Kreis.OSNA, "49593 Bersenbrück, Hastruper Weg 1", "7.9577598731902075,52.552979873148686"));
+        osna.add(new Spielort("Borgloh", Kreis.OSNA, "49176 Hilter, Schulstraße 3", "8.188571602605535,52.19163365592485"));
+        osna.add(new Spielort("Rulle", Kreis.OSNA, "49134 Wallenhorst, Prozessionsweg 3", "8.05634252253922,52.33859374376964"));
+        osna.add(new Spielort("Engter", Kreis.OSNA, "49565 Bramsche, Engter Kirchweg 25", "8.04885907833951,52.38607764402706"));
+        osna.add(new Spielort("Glane", Kreis.OSNA, "49186 Bad Iburg, Am Sportplatz 8", "8.054904072330928,52.14099084572387"));
+        osna.add(new Spielort("Hilter", Kreis.OSNA, "49176 Hilter, Deldener Straße 22", "8.137452531346167,52.133782824902"));
+        osna.add(new Spielort("Bohmte (TV01 & VFG)", Kreis.OSNA, "4916 Bohmte, Zur Ovelgönne 19", "8.304650312237955,52.366656495761056"));
+        osna.add(new Spielort("Groß Mimmelage", Kreis.OSNA, "49635 Badbergen, Frehorster Straße 1", "7.908042619018625,52.66189653654227"));
+        osna.add(new Spielort("Neuenkirchen (Melle)", Kreis.OSNA, "49326 Melle, Zum Hainteich 10", "8.3791149601433,52.13734569908228"));
+        osna.add(new Spielort("Wellingholzhausen", Kreis.OSNA, "49326 Melle, Uhlandstraße 1", "8.261277295625348,52.15924980261516"));
+        osna.add(new Spielort("Kloster Oesede", Kreis.OSNA, "49124 Georgsmarienhütte, Zur Waldbühne 13", "8.108496369616272,52.20452825768675"));
 //        osna.add(new Spielort("", Kreis.OSNA, "", ""));
 //        osna.add(new Spielort("", Kreis.OSNA, "", ""));
 //        osna.add(new Spielort("", Kreis.OSNA, "", ""));
