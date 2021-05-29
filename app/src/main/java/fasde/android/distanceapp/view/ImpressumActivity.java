@@ -84,41 +84,13 @@ public class ImpressumActivity extends AppCompatActivity {
                 break;
             }
             case android.R.id.home:
-                String previousClass = getIntent().getStringExtra("PrevClass");
-                assert previousClass != null;
-                switch (previousClass) {
-                    case "SpielOrtDetail": {
-                        Intent openSpielOrtDetail = new Intent(ImpressumActivity.this, SpielortDetailActivity.class).putExtra("spielort", getIntent().getStringArrayExtra("spielort"));
-                        openSpielOrtDetail.putExtra("variante", getIntent().getStringExtra("variante"));
-                        Toolbox.killAllToasts();
-                        toastNow = Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT);
-                        toastNow.show();
-                        startActivity(openSpielOrtDetail);
-                        break;
-                    }
-                    case "Main": {
-                        Intent openMain = new Intent(ImpressumActivity.this, ListViewActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
-                        Toolbox.killAllToasts();
-                        toastNow = Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT);
-                        toastNow.show();
-                        startActivity(openMain);
-                        break;
-                    }
-                    case "KreisPick": {
-                        Intent openKreisPick = new Intent(ImpressumActivity.this, KreisPickActivity.class);
-                        Toolbox.killAllToasts();
-                        toastNow = Toast.makeText(this, "Schließe Impressum...", Toast.LENGTH_SHORT);
-                        toastNow.show();startActivity(openKreisPick);
-                        break;
-                    }
-                    default:
-                        Log.println(Log.ERROR, "Fehler", "Irgendwas läuft hier strangerweise nicht.");
-                }
+                finish();
+                break;
             case R.id.AktOrt:
                 Intent setOrt = new Intent(ImpressumActivity.this, GeoActivity.class);
                 Toolbox.killAllToasts();
                 startActivity(setOrt);
-
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -149,22 +149,24 @@ public class SpielortDetailActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.Impressum) {
-            Intent openImpressum = new Intent(SpielortDetailActivity.this, ImpressumActivity.class).putExtra("PrevClass", "SpielOrtDetail");
-            Toolbox.killAllToasts();
-            toastNow = Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT);
-            toastNow.show();
-            startActivity(openImpressum);
-        } else if (item.getItemId() == android.R.id.home) {
-            Intent openMain = new Intent(SpielortDetailActivity.this, ListViewActivity.class).putExtra("variante", getIntent().getStringExtra("variante"));
-            Toolbox.killAllToasts();
-            toastNow = Toast.makeText(this, "Schließe Detailansicht...", Toast.LENGTH_SHORT);
-            toastNow.show();
-            startActivity(openMain);
-        } else if (item.getItemId() == R.id.AktOrt) {
-            Intent setOrt = new Intent(SpielortDetailActivity.this, GeoActivity.class);
-            Toolbox.killAllToasts();
-            startActivity(setOrt);
+        switch (item.getItemId()) {
+            case R.id.Impressum: {
+                Intent openImpressum = new Intent(SpielortDetailActivity.this, ImpressumActivity.class);
+                startActivity(openImpressum);
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT);
+                toastNow.show();
+                finish();
+                break;
+            }
+            case android.R.id.home:
+                finishActivity(0);
+                break;
+            case R.id.AktOrt:
+                Intent setOrt = new Intent(SpielortDetailActivity.this, GeoActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(setOrt);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

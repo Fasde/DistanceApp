@@ -45,7 +45,7 @@ public class KreisPickActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         listView = findViewById(R.id.pickList);
@@ -89,21 +89,24 @@ public class KreisPickActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.Impressum) {
-            Intent openImpressum = new Intent(KreisPickActivity.this, ImpressumActivity.class).putExtra("PrevClass", "KreisPick");
-            Toolbox.killAllToasts();
-            toastNow = Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT);
-            toastNow.show();
-            startActivity(openImpressum);
-        } else if (itemId == android.R.id.home) {
-            Toolbox.killAllToasts();
-            toastNow = Toast.makeText(this, "Schließe...", Toast.LENGTH_SHORT);
-            toastNow.show();
-        } else if (itemId == R.id.AktOrt) {
-            Intent setOrt = new Intent(KreisPickActivity.this, GeoActivity.class);
-            Toolbox.killAllToasts();
-            startActivity(setOrt);
+        switch (item.getItemId()) {
+            case R.id.Impressum: {
+                Intent openImpressum = new Intent(KreisPickActivity.this, ImpressumActivity.class);
+                startActivity(openImpressum);
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT);
+                toastNow.show();
+                finish();
+                break;
+            }
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.AktOrt:
+                Intent setOrt = new Intent(KreisPickActivity.this, GeoActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(setOrt);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

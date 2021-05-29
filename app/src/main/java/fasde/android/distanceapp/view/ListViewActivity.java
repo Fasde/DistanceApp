@@ -126,23 +126,24 @@ public class ListViewActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.Impressum) {
-            Intent openImpressum = new Intent(ListViewActivity.this, ImpressumActivity.class).putExtra("PrevClass", "Main");
-            Toolbox.killAllToasts();
-            toastNow = Toast.makeText(this, "Öffne Impressum...", Toast.LENGTH_SHORT);
-            toastNow.show();
-            startActivity(openImpressum);
-        } else if (itemId == android.R.id.home) {
-            Intent openKreisPick = new Intent(ListViewActivity.this, KreisPickActivity.class);
-            Toolbox.killAllToasts();
-            toastNow = Toast.makeText(this, "Schließe Liste des Kreises...", Toast.LENGTH_SHORT);
-            toastNow.show();
-            startActivity(openKreisPick);
-        } else if (itemId == R.id.AktOrt) {
-            Intent setOrt = new Intent(ListViewActivity.this, GeoActivity.class);
-            Toolbox.killAllToasts();
-            startActivity(setOrt);
+        switch (item.getItemId()) {
+            case R.id.Impressum: {
+                Intent openImpressum = new Intent(ListViewActivity.this, ImpressumActivity.class);
+                startActivity(openImpressum);
+                Toolbox.killAllToasts();
+                toastNow = Toast.makeText(this, "Impressum geöffnet.", Toast.LENGTH_SHORT);
+                toastNow.show();
+                finish();
+                break;
+            }
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.AktOrt:
+                Intent setOrt = new Intent(ListViewActivity.this, GeoActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(setOrt);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
