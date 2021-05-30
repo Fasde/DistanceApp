@@ -1,5 +1,6 @@
 package fasde.android.distanceapp.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +15,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import fasde.android.distanceapp.database.SaveData;
-import fasde.android.distanceapp.controller.Toolbox;
-import fasde.android.distanceapp.model.Kreis;
 import fasde.android.distanceapp.R;
+import fasde.android.distanceapp.controller.Toolbox;
+import fasde.android.distanceapp.database.SaveData;
+import fasde.android.distanceapp.model.Kreis;
 
 /**
  * List of picks, to pick the Kreis of Spielorts.
@@ -33,15 +37,14 @@ public class KreisPickActivity extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     Context context = this;
 
-    /**
-     * Creates a view to display the picks to pick a Kreis of Spielorts.
-     *
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kreis_pick_activity);
+
+        AdView adView = findViewById(R.id.kreispickAdView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -87,6 +90,7 @@ public class KreisPickActivity extends AppCompatActivity {
      * @param item the item selected from the menu
      * @return the boolean value of the item selected
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

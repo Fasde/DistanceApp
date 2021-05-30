@@ -1,5 +1,6 @@
 package fasde.android.distanceapp.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +8,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -18,15 +17,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import fasde.android.distanceapp.controller.SpielortAdapter;
-import fasde.android.distanceapp.database.SaveData;
-import fasde.android.distanceapp.controller.Toolbox;
-import fasde.android.distanceapp.model.Spielort;
 import fasde.android.distanceapp.R;
+import fasde.android.distanceapp.controller.SpielortAdapter;
+import fasde.android.distanceapp.controller.Toolbox;
+import fasde.android.distanceapp.database.SaveData;
+import fasde.android.distanceapp.model.Spielort;
 
 /**
  * Creates a Activity about a ListView of Spielorts.
@@ -41,16 +43,14 @@ public class ListViewActivity extends AppCompatActivity {
     EditText editText;
     Context context = this;
 
-    /**
-     * Gets the whole app running. Creates a listView, an editText and a spielortAdapter and gets
-     * all of them running.
-     *
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
+
+        AdView adView = findViewById(R.id.listAdView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -90,17 +90,13 @@ public class ListViewActivity extends AppCompatActivity {
             }
         });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent openDetail = new Intent(ListViewActivity.this, SpielortDetailActivity.class);
-                SpielortDetailActivity.setAktuellerSpielort((Spielort) listView.getItemAtPosition(position));
-                Toolbox.killAllToasts();
-                toastNow = Toast.makeText(context, "Öffne gewählten Spielort...", Toast.LENGTH_SHORT);
-                toastNow.show();
-                startActivity(openDetail);
-            }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent openDetail = new Intent(ListViewActivity.this, SpielortDetailActivity.class);
+            SpielortDetailActivity.setAktuellerSpielort((Spielort) listView.getItemAtPosition(position));
+            Toolbox.killAllToasts();
+            toastNow = Toast.makeText(context, "Öffne gewählten Spielort...", Toast.LENGTH_SHORT);
+            toastNow.show();
+            startActivity(openDetail);
         });
 
 
@@ -124,6 +120,7 @@ public class ListViewActivity extends AppCompatActivity {
      * @param item the item selected from the menu
      * @return the boolean value of the item selected
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

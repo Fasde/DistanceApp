@@ -2,16 +2,12 @@ package fasde.android.distanceapp.view;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,19 +26,22 @@ import androidx.core.content.ContextCompat;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import fasde.android.distanceapp.controller.Toolbox;
 import fasde.android.distanceapp.R;
+import fasde.android.distanceapp.controller.Toolbox;
 import fasde.android.distanceapp.geo.Geo;
 
 public class GeoActivity extends AppCompatActivity {
 
     private static Toast toastNow;
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch switchCustomHome;
     TextView textCustomHome;
     Button submitCustomHome;
@@ -53,6 +52,11 @@ public class GeoActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geo);
+
+        AdView adView = findViewById(R.id.geoAdView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -134,7 +138,7 @@ public class GeoActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         },
-                error -> {Toast.makeText(this, "Fehler", Toast.LENGTH_LONG).show();});
+                error -> Toast.makeText(this, "Fehler", Toast.LENGTH_LONG).show());
         Volley.newRequestQueue(this).add(req);
     }
 
@@ -157,6 +161,7 @@ public class GeoActivity extends AppCompatActivity {
      * @param item the item selected from the menu
      * @return the boolean value of the item selected
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

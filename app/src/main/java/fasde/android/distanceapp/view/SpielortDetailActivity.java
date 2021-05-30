@@ -1,5 +1,6 @@
 package fasde.android.distanceapp.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.json.JSONObject;
 
@@ -50,15 +53,15 @@ public class SpielortDetailActivity extends AppCompatActivity {
             toastNow.cancel();
     }
 
-    /**
-     * Creates a view, that shoes details about a specific Spielort.
-     *
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_detail);
+
+        AdView adView = findViewById(R.id.itemAdView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -117,9 +120,9 @@ public class SpielortDetailActivity extends AppCompatActivity {
         TextView distanzView = findViewById(R.id.detail_km);
         TextView kostenView = findViewById(R.id.detail_kosten);
         TextView dauerView = findViewById(R.id.detail_duration);
-        Double d = Double.parseDouble(distance);
+        double d = Double.parseDouble(distance);
         d /= 1000;
-        int i = d.intValue();
+        int i = (int) d;
         String distanzString = i + "km pro Strecke";
         distanzView.setText(distanzString);
         String durString = ((int)(Double.parseDouble(duration)/60d)) + " Minuten";
@@ -147,6 +150,7 @@ public class SpielortDetailActivity extends AppCompatActivity {
      * @param item the item selected from the menu
      * @return the boolean value of the item selected
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

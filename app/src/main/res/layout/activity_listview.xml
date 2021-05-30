@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/bg"
     android:backgroundTint="#E6FFFFFF"
+    android:backgroundTintMode="src_over"
     tools:context="fasde.android.distanceapp.view.ListViewActivity">
 
     <EditText android:id="@+id/inputSearch"
@@ -18,5 +19,18 @@
         android:id="@+id/list"
         android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listAdView"/>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listAdView"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/ad_pub_id"
+        />
 </RelativeLayout>

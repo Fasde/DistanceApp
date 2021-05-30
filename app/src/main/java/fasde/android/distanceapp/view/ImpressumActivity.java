@@ -1,8 +1,8 @@
 package fasde.android.distanceapp.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,8 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import fasde.android.distanceapp.controller.Toolbox;
 import fasde.android.distanceapp.R;
+import fasde.android.distanceapp.controller.Toolbox;
 
 public class ImpressumActivity extends AppCompatActivity {
 
@@ -24,6 +24,9 @@ public class ImpressumActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.impressum);
+
+
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -71,6 +74,7 @@ public class ImpressumActivity extends AppCompatActivity {
      * @param item the item selected from the menu
      * @return the boolean value of the item selected
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
