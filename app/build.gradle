@@ -7,8 +7,8 @@ android {
         applicationId "fasde.android.distanceapp"
         minSdkVersion 27
         targetSdkVersion 30
-        versionCode 3
-        versionName "2.2.0"
+        versionCode 4
+        versionName "2.3.0 Honeybee"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
