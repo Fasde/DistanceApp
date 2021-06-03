@@ -8,10 +8,14 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,14 +28,22 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import fasde.android.distanceapp.R;
 import fasde.android.distanceapp.controller.Toolbox;
@@ -43,8 +55,9 @@ public class GeoActivity extends AppCompatActivity {
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch switchCustomHome;
-    TextView textCustomHome;
+    EditText textCustomHome;
     Button submitCustomHome;
+    RequestQueue queue;
 
 
     @SuppressLint("ResourceType")
@@ -62,33 +75,55 @@ public class GeoActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        queue = Volley.newRequestQueue(this);
+
         switchCustomHome = findViewById(R.id.switchCustomHome);
         textCustomHome = findViewById(R.id.textCustomHome);
         submitCustomHome = findViewById(R.id.submitCustomHome);
 
+        textCustomHome.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                getLocationByInput();
+            }
+        });
+
         switchCustomHome.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 getGeoPermission();
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
                     return;
                 }
                 textCustomHome.setVisibility(View.INVISIBLE);
+                getCurrentLocation();
             } else {
                 textCustomHome.setVisibility(View.VISIBLE);
+                getLocationByInput();
             }
         });
 
         submitCustomHome.setOnClickListener(view -> {
-            if(textCustomHome.getText().equals("")){
-                Toast.makeText(this, "Text darf nicht leer sein", Toast.LENGTH_LONG).show();
-                return;
-            }
             if (switchCustomHome.isChecked()) {
-                // Automatische Location
-                getCurrentLocation();
             } else {
                 // Manuelle Location
-                getLocationByInput();
+                if (textCustomHome.getText().toString().equals("")) {
+                    Toast.makeText(this, "Text darf nicht leer sein.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (Geo.homeCords == null) {
+                    Toast.makeText(this, "Die Berechnung der Adresse hat nicht geklappt. Bitte versuchen Sie es mit einer anderen Adresseingabe.", Toast.LENGTH_LONG).show();
+                }
             }
             Intent back = new Intent(this, KreisPickActivity.class);
             startActivity(back);
@@ -96,8 +131,8 @@ public class GeoActivity extends AppCompatActivity {
 
     }
 
-    private void getGeoPermission(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+    private void getGeoPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
     }
@@ -122,24 +157,28 @@ public class GeoActivity extends AppCompatActivity {
             return;
         }
         Location location = loc.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if(location == null) return;
-        Geo.homeCords = location.getLongitude()+","+location.getLatitude();
+        if (location == null) return;
+        Geo.homeCords = location.getLongitude() + "," + location.getLatitude();
     }
 
-    private void getLocationByInput(){
+    private void getLocationByInput() {
         String dataToLookFor = textCustomHome.getText().toString();
-        String url = "https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf6248b2d893fc69e7408c85550ae302e3b97d&text="+dataToLookFor;
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, response ->
-        {
+        try {
+            dataToLookFor = URLEncoder.encode(dataToLookFor, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String url = "https://nominatim.geocoding.ai/search.php?q=" + dataToLookFor + "&countrycodes=de&limit=1";
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
             try {
-                JSONArray coords = response.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates");
-                Geo.homeCords = coords.get(0).toString()+","+coords.get(1);
+                JSONObject obj = response.getJSONObject(0);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        },
-                error -> Toast.makeText(this, "Fehler", Toast.LENGTH_LONG).show());
-        Volley.newRequestQueue(this).add(req);
+        }, error -> {
+            Log.d("JSON","Fehler in der JSON-Vearbeitung");
+        });
+        queue.add(req);
     }
 
     /**
@@ -186,8 +225,8 @@ public class GeoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static void killToast(){
-        if(toastNow != null)
+    public static void killToast() {
+        if (toastNow != null)
             toastNow.cancel();
     }
 }
