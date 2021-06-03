@@ -23,7 +23,7 @@
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <EditText
-        android:id="@+id/textCustomHome"
+        android:id="@+id/textCustomHomePLZ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -31,7 +31,29 @@
         android:layout_below="@+id/switchCustomHome"
         android:layout_marginHorizontal="50dp"
         android:width="300dp"
-        android:hint="@string/hier_den_eigenen_ort_eingeben"/>
+        android:hint="@string/plz"/>
+
+    <EditText
+        android:id="@+id/textCustomHomeOrt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_below="@+id/textCustomHomePLZ"
+        android:layout_marginHorizontal="50dp"
+        android:width="300dp"
+        android:hint="@string/ort"/>
+
+    <EditText
+        android:id="@+id/textCustomHomeStrasse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_below="@+id/textCustomHomeOrt"
+        android:layout_marginHorizontal="50dp"
+        android:width="300dp"
+        android:hint="@string/strasse"/>
 
     <Button
         android:id="@+id/submitCustomHome"
@@ -40,11 +62,12 @@
         android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="20dp"
         android:text="@string/ort_ausw_hlen"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorGrey"
         android:textSize="17sp"
         android:padding="15dp"
         android:textColor="@color/colorWhite"
         android:layout_above="@+id/geoAdView"
+        android:enabled="false"
         />
 
     <com.google.android.gms.ads.AdView

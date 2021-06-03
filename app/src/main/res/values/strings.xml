@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DistanceApp</string>
     <string name="display_name">Spielort-Distanz</string>
-    <string name="version">2.4.0 Butterfly</string>
+    <string name="version">2.4.1 Butterfly</string>
     <string name="edit_text_hint">Suche nach Spielort oder Adresse</string>
     <string name="impressum">Impressum</string>
     <string name="detailHeader">Zweck und Inhalt:</string>
@@ -25,4 +25,7 @@
     <string name="adresse">Adresse:</string>
     <string name="fahrtkosten">Fahrtkosten:</string>
     <string name="ad_pub_id">ca-app-pub-4053524672191361/1394011872</string>
+    <string name="plz">PLZ</string>
+    <string name="ort">Ort</string>
+    <string name="strasse">Strasse</string>
 </resources>
