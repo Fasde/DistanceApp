@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/aktuellen_standort_verwenden"
         android:checked="false"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="100dp"
         android:foregroundTint="@color/colorPrimary"
         android:backgroundTint="@color/colorAccent"
         android:layout_marginHorizontal="80dp"
