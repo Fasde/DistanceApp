@@ -95,6 +95,10 @@ public class GeoActivity extends AppCompatActivity {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
                     return;
                 }
+                if(!((LocationManager) getSystemService(LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)){
+                    Toast.makeText(this, "GPS muss für diesen Dienst aktiviert sein.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 textCustomHomePLZ.setVisibility(View.INVISIBLE);
                 textCustomHomeOrt.setVisibility(View.INVISIBLE);
                 textCustomHomeStrasse.setVisibility(View.INVISIBLE);
@@ -236,7 +240,7 @@ public class GeoActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }, error -> {
-            Log.d("JSON","Fehler in der JSON-Vearbeitung");
+            Log.d("JSON","Fehler in der JSON-Vearbeitung.");
         });
         queue.add(req);
     }
