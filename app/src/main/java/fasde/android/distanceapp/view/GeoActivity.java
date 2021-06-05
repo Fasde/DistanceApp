@@ -93,10 +93,12 @@ public class GeoActivity extends AppCompatActivity {
             if (b) {
                 getGeoPermission();
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
+                    switchCustomHome.setChecked(false);
                     return;
                 }
                 if(!((LocationManager) getSystemService(LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)){
                     Toast.makeText(this, "GPS muss für diesen Dienst aktiviert sein.", Toast.LENGTH_LONG).show();
+                    switchCustomHome.setChecked(false);
                     return;
                 }
                 textCustomHomePLZ.setVisibility(View.INVISIBLE);
@@ -106,6 +108,10 @@ public class GeoActivity extends AppCompatActivity {
                 submitCustomHome.setEnabled(true);
                 submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
             } else {
+                if (textCustomHomeOrt.getText().toString().equals("") || textCustomHomePLZ.getText().toString().equals("") || textCustomHomeStrasse.getText().toString().equals("")) {
+                    submitCustomHome.setEnabled(false);
+                    submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorGrey), PorterDuff.Mode.SRC_ATOP);
+                }
                 textCustomHomePLZ.setVisibility(View.VISIBLE);
                 textCustomHomeOrt.setVisibility(View.VISIBLE);
                 textCustomHomeStrasse.setVisibility(View.VISIBLE);

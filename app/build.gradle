@@ -7,8 +7,8 @@ android {
         applicationId "fasde.android.distanceapp"
         minSdkVersion 27
         targetSdkVersion 30
-        versionCode 10
-        versionName "2.4.2 Butterfly"
+        versionCode 11
+        versionName "2.4.3 Butterfly"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
