@@ -18,6 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         MobileAds.initialize(this, initializationStatus -> System.out.println("Ads initialized!"));
         Intent intent = new Intent(this, GeoActivity.class);
+        intent.putExtra("Dest", "Start");
         startActivity(intent);
         finish();
     }

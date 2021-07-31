@@ -3,6 +3,7 @@ package fasde.android.distanceapp.view;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -56,6 +58,23 @@ public class GeoActivity extends AppCompatActivity {
         AdView adView = findViewById(R.id.geoAdView);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+
+        String coords = Geo.loadPersistedHome(getApplicationContext());
+        if(coords == null){
+            // TODO: Keine vorhandene Location, Abfrage wie gehabt
+        } else {
+            // TODO: Weiterer Switch, ob Daten wie gehabt genommen werden sollen, da bereits vorhanden
+            new AlertDialog.Builder(this)
+                .setTitle("Vorhandene Startadresse")
+                .setMessage("Es wurde eine bereits vorhandene Startadresse gefunden. Soll diese weiter genutzt werden?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                    Intent back = new Intent(this, KreisPickActivity.class);
+                    startActivity(back);
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
+        }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -123,7 +142,7 @@ public class GeoActivity extends AppCompatActivity {
         }
         Location location = loc.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(location == null) return;
-        Geo.homeCords = location.getLongitude()+","+location.getLatitude();
+        Geo.persistHome(getApplicationContext(),location.getLongitude()+","+location.getLatitude());
     }
 
     private void getLocationByInput(){
@@ -133,7 +152,7 @@ public class GeoActivity extends AppCompatActivity {
         {
             try {
                 JSONArray coords = response.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates");
-                Geo.homeCords = coords.get(0).toString()+","+coords.get(1);
+                Geo.persistHome(getApplicationContext(),coords.get(0).toString()+","+coords.get(1));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

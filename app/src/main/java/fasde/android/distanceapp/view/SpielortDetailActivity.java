@@ -103,7 +103,7 @@ public class SpielortDetailActivity extends AppCompatActivity {
     }
 
     private void request() {
-        String url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248b2d893fc69e7408c85550ae302e3b97d&start="+Geo.homeCords+"&end="+Geo.destCords;
+        String url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248b2d893fc69e7408c85550ae302e3b97d&start="+Geo.loadPersistedHome(getApplicationContext())+"&end="+Geo.destCords;
         JsonObjectRequest req2 = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
            try{
                JSONObject object = response.getJSONArray("features").getJSONObject(0).getJSONObject("properties").getJSONObject("summary");
