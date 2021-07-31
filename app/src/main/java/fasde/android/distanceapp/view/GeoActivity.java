@@ -3,18 +3,21 @@ package fasde.android.distanceapp.view;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,14 +29,19 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import fasde.android.distanceapp.R;
 import fasde.android.distanceapp.controller.Toolbox;
@@ -45,8 +53,11 @@ public class GeoActivity extends AppCompatActivity {
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch switchCustomHome;
-    TextView textCustomHome;
+    EditText textCustomHomePLZ;
+    EditText textCustomHomeOrt;
+    EditText textCustomHomeStrasse;
     Button submitCustomHome;
+    RequestQueue queue;
 
 
     @SuppressLint("ResourceType")
@@ -60,20 +71,20 @@ public class GeoActivity extends AppCompatActivity {
         adView.loadAd(adRequest);
 
         String coords = Geo.loadPersistedHome(getApplicationContext());
-        if(coords == null){
+        if (coords == null) {
             // TODO: Keine vorhandene Location, Abfrage wie gehabt
         } else {
             // TODO: Weiterer Switch, ob Daten wie gehabt genommen werden sollen, da bereits vorhanden
             new AlertDialog.Builder(this)
-                .setTitle("Vorhandene Startadresse")
-                .setMessage("Es wurde eine bereits vorhandene Startadresse gefunden. Soll diese weiter genutzt werden?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                    Intent back = new Intent(this, KreisPickActivity.class);
-                    startActivity(back);
-                })
-                .setNegativeButton(android.R.string.no, null)
-                .show();
+                    .setTitle("Vorhandene Startadresse")
+                    .setMessage("Es wurde eine bereits vorhandene Startadresse gefunden. Soll diese weiter genutzt werden?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        Intent back = new Intent(this, KreisPickActivity.class);
+                        startActivity(back);
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
         }
 
         ActionBar actionBar = getSupportActionBar();
@@ -81,33 +92,118 @@ public class GeoActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        queue = Volley.newRequestQueue(this);
+
         switchCustomHome = findViewById(R.id.switchCustomHome);
-        textCustomHome = findViewById(R.id.textCustomHome);
+        textCustomHomePLZ = findViewById(R.id.textCustomHomePLZ);
+        textCustomHomeOrt = findViewById(R.id.textCustomHomeOrt);
+        textCustomHomeStrasse = findViewById(R.id.textCustomHomeStrasse);
         submitCustomHome = findViewById(R.id.submitCustomHome);
 
         switchCustomHome.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 getGeoPermission();
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
+                    switchCustomHome.setChecked(false);
                     return;
                 }
-                textCustomHome.setVisibility(View.INVISIBLE);
+                if (!((LocationManager) getSystemService(LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Toast.makeText(this, "GPS muss für diesen Dienst aktiviert sein.", Toast.LENGTH_LONG).show();
+                    switchCustomHome.setChecked(false);
+                    return;
+                }
+                textCustomHomePLZ.setVisibility(View.INVISIBLE);
+                textCustomHomeOrt.setVisibility(View.INVISIBLE);
+                textCustomHomeStrasse.setVisibility(View.INVISIBLE);
+                getCurrentLocation();
+                submitCustomHome.setEnabled(true);
+                submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
             } else {
-                textCustomHome.setVisibility(View.VISIBLE);
+                if (textCustomHomeOrt.getText().toString().equals("") || textCustomHomePLZ.getText().toString().equals("") || textCustomHomeStrasse.getText().toString().equals("")) {
+                    submitCustomHome.setEnabled(false);
+                    submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorGrey), PorterDuff.Mode.SRC_ATOP);
+                }
+                textCustomHomePLZ.setVisibility(View.VISIBLE);
+                textCustomHomeOrt.setVisibility(View.VISIBLE);
+                textCustomHomeStrasse.setVisibility(View.VISIBLE);
+                getLocationByInput();
+            }
+        });
+
+        textCustomHomePLZ.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!textCustomHomeOrt.getText().toString().equals("") && !textCustomHomePLZ.getText().toString().equals("") && !textCustomHomeStrasse.getText().toString().equals("")) {
+                    submitCustomHome.setEnabled(true);
+                    submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+                    getLocationByInput();
+                }
+            }
+        });
+
+        textCustomHomeOrt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!textCustomHomeOrt.getText().toString().equals("") && !textCustomHomePLZ.getText().toString().equals("") && !textCustomHomeStrasse.getText().toString().equals("")) {
+                    submitCustomHome.setEnabled(true);
+                    submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+                    getLocationByInput();
+                }
+            }
+        });
+
+        textCustomHomeStrasse.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!textCustomHomeOrt.getText().toString().equals("") && !textCustomHomePLZ.getText().toString().equals("") && !textCustomHomeStrasse.getText().toString().equals("")) {
+                    submitCustomHome.setEnabled(true);
+                    submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+                    getLocationByInput();
+                }
             }
         });
 
         submitCustomHome.setOnClickListener(view -> {
-            if(textCustomHome.getText().equals("")){
-                Toast.makeText(this, "Text darf nicht leer sein", Toast.LENGTH_LONG).show();
-                return;
-            }
             if (switchCustomHome.isChecked()) {
-                // Automatische Location
-                getCurrentLocation();
             } else {
                 // Manuelle Location
-                getLocationByInput();
+                if (textCustomHomeOrt.getText().toString().equals("") || textCustomHomePLZ.getText().toString().equals("") || textCustomHomeStrasse.getText().toString().equals("")) {
+                    Toast.makeText(this, "Text darf nicht leer sein.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (Geo.loadPersistedHome(getApplicationContext()) == null) {
+                    Toast.makeText(this, "Die Berechnung der Adresse hat nicht geklappt. Bitte versuchen Sie es mit einer anderen Adresseingabe.", Toast.LENGTH_LONG).show();
+                }
             }
             Intent back = new Intent(this, KreisPickActivity.class);
             startActivity(back);
@@ -115,8 +211,8 @@ public class GeoActivity extends AppCompatActivity {
 
     }
 
-    private void getGeoPermission(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+    private void getGeoPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
     }
@@ -141,24 +237,29 @@ public class GeoActivity extends AppCompatActivity {
             return;
         }
         Location location = loc.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if(location == null) return;
-        Geo.persistHome(getApplicationContext(),location.getLongitude()+","+location.getLatitude());
+        if (location == null) return;
+        Geo.persistHome(getApplicationContext(), location.getLongitude() + "," + location.getLatitude());
     }
 
-    private void getLocationByInput(){
-        String dataToLookFor = textCustomHome.getText().toString();
-        String url = "https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf6248b2d893fc69e7408c85550ae302e3b97d&text="+dataToLookFor;
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, response ->
-        {
+    private void getLocationByInput() {
+        String dataToLookFor = textCustomHomePLZ.getText().toString().trim() + " " + textCustomHomeOrt.getText().toString().trim() + ", " + textCustomHomeStrasse.getText().toString().trim();
+        try {
+            dataToLookFor = URLEncoder.encode(dataToLookFor, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String url = "https://nominatim.geocoding.ai/search.php?q=" + dataToLookFor + "&countrycodes=de&limit=1";
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
             try {
-                JSONArray coords = response.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates");
-                Geo.persistHome(getApplicationContext(),coords.get(0).toString()+","+coords.get(1));
+                JSONObject obj = response.getJSONObject(0);
+                Geo.persistHome(getApplicationContext(), obj.getString("lon") + "," + obj.getString("lat"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        },
-                error -> Toast.makeText(this, "Fehler", Toast.LENGTH_LONG).show());
-        Volley.newRequestQueue(this).add(req);
+        }, error -> {
+            Log.d("JSON", "Fehler in der JSON-Vearbeitung.");
+        });
+        queue.add(req);
     }
 
     /**
@@ -205,8 +306,8 @@ public class GeoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static void killToast(){
-        if(toastNow != null)
+    public static void killToast() {
+        if (toastNow != null)
             toastNow.cancel();
     }
 }

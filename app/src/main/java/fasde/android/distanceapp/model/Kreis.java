@@ -12,7 +12,7 @@ public enum Kreis {
     CLP("Cloppenburg", "NFV"),
     OSNA("Osnabrück", "NFV"),
     VECHTA("Vechta", "NFV"),
-    OLDE("Oldenburg", "NFV"),
+    OLDE("Oldenburg-Land/Delmenhorst", "NFV"),
     JWH("Jade-Weser-Hunte", "NFV");
 
     @Getter
