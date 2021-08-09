@@ -71,7 +71,7 @@ public class GeoActivity extends AppCompatActivity {
         adView.loadAd(adRequest);
 
         String coords = Geo.loadPersistedHome(getApplicationContext());
-        if (coords == null) {
+        if (coords == null || coords.equals("0,0")) {
             // TODO: Keine vorhandene Location, Abfrage wie gehabt
         } else {
             // TODO: Weiterer Switch, ob Daten wie gehabt genommen werden sollen, da bereits vorhanden
