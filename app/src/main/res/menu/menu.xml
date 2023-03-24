@@ -3,8 +3,17 @@
 
 
     <item android:id="@+id/AktOrt"
-        android:title="@string/aktueller_ort"
-    />
+        android:title="@string/aktueller_ort"/>
+
+    <item android:id="@+id/Kreislist"
+        android:title="@string/liste_aller_kreise"/>
+
+    <item android:id="@+id/Referees"
+        android:title="@string/schiedsrichter" />
+
+    <item android:id="@+id/Routenplanung"
+        android:title="@string/gespann_planung" />
+
     <item android:id="@+id/Impressum"
         android:title="@string/impressum"/>
 </menu>

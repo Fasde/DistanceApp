@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.PorterDuff;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -27,6 +26,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.BlendModeColorFilterCompat;
+import androidx.core.graphics.BlendModeCompat;
+import androidx.core.splashscreen.SplashScreen;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -63,6 +65,8 @@ public class GeoActivity extends AppCompatActivity {
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        SplashScreen.installSplashScreen(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geo);
 
@@ -71,19 +75,16 @@ public class GeoActivity extends AppCompatActivity {
         adView.loadAd(adRequest);
 
         String coords = Geo.loadPersistedHome(getApplicationContext());
-        if (coords == null || coords.equals("0,0")) {
-            // TODO: Keine vorhandene Location, Abfrage wie gehabt
-        } else {
-            // TODO: Weiterer Switch, ob Daten wie gehabt genommen werden sollen, da bereits vorhanden
+        if (coords != null && !coords.equals("0,0")) {
             new AlertDialog.Builder(this)
                     .setTitle("Vorhandene Startadresse")
                     .setMessage("Es wurde eine bereits vorhandene Startadresse gefunden. Soll diese weiter genutzt werden?")
                     .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                         Intent back = new Intent(this, KreisPickActivity.class);
                         startActivity(back);
                     })
-                    .setNegativeButton(android.R.string.no, null)
+                    .setNegativeButton(android.R.string.cancel, null)
                     .show();
         }
 
@@ -117,16 +118,15 @@ public class GeoActivity extends AppCompatActivity {
                 textCustomHomeStrasse.setVisibility(View.INVISIBLE);
                 getCurrentLocation();
                 submitCustomHome.setEnabled(true);
-                submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+                submitCustomHome.getBackground().setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(R.color.colorPrimaryDark, BlendModeCompat.SRC_ATOP));
             } else {
                 if (textCustomHomeOrt.getText().toString().equals("") || textCustomHomePLZ.getText().toString().equals("") || textCustomHomeStrasse.getText().toString().equals("")) {
                     submitCustomHome.setEnabled(false);
-                    submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorGrey), PorterDuff.Mode.SRC_ATOP);
+                    submitCustomHome.getBackground().setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(R.color.colorPrimaryDark, BlendModeCompat.SRC_ATOP));
                 }
                 textCustomHomePLZ.setVisibility(View.VISIBLE);
                 textCustomHomeOrt.setVisibility(View.VISIBLE);
                 textCustomHomeStrasse.setVisibility(View.VISIBLE);
-                getLocationByInput();
             }
         });
 
@@ -145,8 +145,7 @@ public class GeoActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if (!textCustomHomeOrt.getText().toString().equals("") && !textCustomHomePLZ.getText().toString().equals("") && !textCustomHomeStrasse.getText().toString().equals("")) {
                     submitCustomHome.setEnabled(true);
-                    submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
-                    getLocationByInput();
+                    submitCustomHome.getBackground().setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(R.color.colorPrimaryDark, BlendModeCompat.SRC_ATOP));
                 }
             }
         });
@@ -166,8 +165,7 @@ public class GeoActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if (!textCustomHomeOrt.getText().toString().equals("") && !textCustomHomePLZ.getText().toString().equals("") && !textCustomHomeStrasse.getText().toString().equals("")) {
                     submitCustomHome.setEnabled(true);
-                    submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
-                    getLocationByInput();
+                    submitCustomHome.getBackground().setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(R.color.colorPrimaryDark, BlendModeCompat.SRC_ATOP));
                 }
             }
         });
@@ -187,20 +185,19 @@ public class GeoActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if (!textCustomHomeOrt.getText().toString().equals("") && !textCustomHomePLZ.getText().toString().equals("") && !textCustomHomeStrasse.getText().toString().equals("")) {
                     submitCustomHome.setEnabled(true);
-                    submitCustomHome.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
-                    getLocationByInput();
+                    submitCustomHome.getBackground().setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(R.color.colorPrimaryDark, BlendModeCompat.SRC_ATOP));
                 }
             }
         });
 
         submitCustomHome.setOnClickListener(view -> {
-            if (switchCustomHome.isChecked()) {
-            } else {
+            if (!switchCustomHome.isChecked()) {
                 // Manuelle Location
                 if (textCustomHomeOrt.getText().toString().equals("") || textCustomHomePLZ.getText().toString().equals("") || textCustomHomeStrasse.getText().toString().equals("")) {
                     Toast.makeText(this, "Text darf nicht leer sein.", Toast.LENGTH_LONG).show();
                     return;
                 }
+                getLocationByInput();
                 if (Geo.loadPersistedHome(getApplicationContext()) == null) {
                     Toast.makeText(this, "Die Berechnung der Adresse hat nicht geklappt. Bitte versuchen Sie es mit einer anderen Adresseingabe.", Toast.LENGTH_LONG).show();
                 }
@@ -248,7 +245,7 @@ public class GeoActivity extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url = "https://nominatim.geocoding.ai/search.php?q=" + dataToLookFor + "&countrycodes=de&limit=1";
+        String url = "https://nominatim.openstreetmap.org/search?q=" + dataToLookFor + "&format=json&countrycodes=de&limit=1";
         JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
             try {
                 JSONObject obj = response.getJSONObject(0);
@@ -256,9 +253,7 @@ public class GeoActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, error -> {
-            Log.d("JSON", "Fehler in der JSON-Vearbeitung.");
-        });
+        }, error -> Log.d("JSON", error.toString()));
         queue.add(req);
     }
 
@@ -294,6 +289,24 @@ public class GeoActivity extends AppCompatActivity {
                 finish();
                 break;
             }
+            case R.id.Kreislist:
+                Intent kreislist = new Intent(GeoActivity.this, ListViewActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(kreislist);
+                finish();
+                break;
+            case R.id.Routenplanung:
+                Intent gespann = new Intent(this, GespannPlanungActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(gespann);
+                finish();
+                break;
+            case R.id.Referees:
+                Intent ref = new Intent(GeoActivity.this, RefereeActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(ref);
+                finish();
+                break;
             case android.R.id.home:
                 finish();
                 break;

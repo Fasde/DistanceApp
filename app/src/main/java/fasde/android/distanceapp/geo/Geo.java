@@ -10,6 +10,7 @@ public class Geo {
     public static void persistHome(Context context,String coords){
         SharedPreferences settings = context.getSharedPreferences("COORDS", 0);
         SharedPreferences.Editor editor = settings.edit();
+        editor.remove("homeCoords");
         editor.putString("homeCoords", coords);
         editor.apply();
     }

@@ -26,8 +26,6 @@ public class ImpressumActivity extends AppCompatActivity {
         setContentView(R.layout.impressum);
 
 
-
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -78,7 +76,7 @@ public class ImpressumActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.Impressum: {
+            case R.id.Impressum:
                 Intent openImpressum = new Intent(ImpressumActivity.this, ImpressumActivity.class);
                 startActivity(openImpressum);
                 Toolbox.killAllToasts();
@@ -86,7 +84,24 @@ public class ImpressumActivity extends AppCompatActivity {
                 toastNow.show();
                 finish();
                 break;
-            }
+            case R.id.Kreislist:
+                Intent kreislist = new Intent(this, ListViewActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(kreislist);
+                finish();
+                break;
+            case R.id.Routenplanung:
+                Intent gespann = new Intent(this, GespannPlanungActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(gespann);
+                finish();
+                break;
+            case R.id.Referees:
+                Intent ref = new Intent(ImpressumActivity.this, RefereeActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(ref);
+                finish();
+                break;
             case android.R.id.home:
                 finish();
                 break;
@@ -99,8 +114,8 @@ public class ImpressumActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static void killToast(){
-        if(toastNow != null)
+    public static void killToast() {
+        if (toastNow != null)
             toastNow.cancel();
     }
 }

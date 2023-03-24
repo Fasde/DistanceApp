@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:backgroundTint="#E6FFFFFF"
+    android:backgroundTintMode="src_over"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.RefereeActivity"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_query"
+        android:autofillHints=""
+        android:inputType="text"
+        android:maxLines="1"
+        android:hint="@string/suche_nach_schiedsrichter"
+        tools:ignore="LabelFor" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_query"
+        android:id="@+id/reflistview"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addRefButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/listAdView"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="15dp"
+        android:background="@drawable/floating_action_button"
+        android:contentDescription="@string/button_zum_hinzuf_gen_neuer_schiedsrichter"
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_add_black_18dp">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listAdView"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/ad_pub_id"
+        />
+
+</RelativeLayout>

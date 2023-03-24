@@ -1,5 +1,7 @@
 package fasde.android.distanceapp.database;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -9,11 +11,17 @@ import java.util.List;
 import java.util.Map;
 
 import fasde.android.distanceapp.model.Kreis;
+import fasde.android.distanceapp.model.Referee;
 import fasde.android.distanceapp.model.Spielort;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class SaveData {
+
+    public Map<String, String> getRefs(Context context){
+        SharedPreferences refPrefs = context.getSharedPreferences("REFEREES", 0);
+        return (Map<String, String>) refPrefs.getAll();
+    }
 
     public Map<String, Spielort> fillVereine(String variante) {
         HashMap<String, Spielort> vereine = new HashMap<>();
