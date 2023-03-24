@@ -133,6 +133,24 @@ public class ListViewActivity extends AppCompatActivity {
                 finish();
                 break;
             }
+            case R.id.Referees:
+                Intent ref = new Intent(ListViewActivity.this, RefereeActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(ref);
+                finish();
+                break;
+            case R.id.Routenplanung:
+                Intent gespann = new Intent(this, GespannPlanungActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(gespann);
+                finish();
+                break;
+            case R.id.Kreislist:
+                Intent kreislist = new Intent(this, ListViewActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(kreislist);
+                finish();
+                break;
             case android.R.id.home:
                 finish();
                 break;
@@ -145,12 +163,12 @@ public class ListViewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static void setAktuellerKreis(@Nullable String kreis){
+    public static void setAktuellerKreis(@Nullable String kreis) {
         aktuellerKreis = kreis;
     }
 
-    public static void killToast(){
-        if(toastNow != null)
+    public static void killToast() {
+        if (toastNow != null)
             toastNow.cancel();
     }
 }

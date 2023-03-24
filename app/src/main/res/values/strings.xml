@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DistanceApp</string>
     <string name="display_name">Spielort-Distanz</string>
-    <string name="version">2.4.3 Butterfly</string>
+    <string name="version">2.6.0 Cockroach</string>
     <string name="edit_text_hint">Suche nach Spielort oder Adresse</string>
     <string name="impressum">Impressum</string>
     <string name="detailHeader">Zweck und Inhalt:</string>
@@ -28,4 +28,22 @@
     <string name="plz">PLZ</string>
     <string name="ort">Ort</string>
     <string name="strasse">Strasse</string>
+    <string name="button_zum_hinzuf_gen_neuer_schiedsrichter">Button zum Hinzufügen neuer Schiedsrichter</string>
+    <string name="schiedsrichter">Schiedsrichter</string>
+    <string name="suche_nach_schiedsrichter">Suche nach Schiedsrichter</string>
+    <string name="vorname_nachname">Vorname Nachname</string>
+    <string name="plz_ort">PLZ Ort</string>
+    <string name="abschicken">Abschicken</string>
+    <string name="l_schen">Löschen</string>
+    <string name="liste_aller_kreise">Liste aller Kreise</string>
+    <string name="gespann_planung">Gespann-Planung</string>
+    <string name="startadresse">Startadresse:</string>
+    <string name="erster_assistent">Erster Assistent</string>
+    <string name="zweiter_assistent">Zweiter Assistent:</string>
+    <string name="zielort">Zielort:</string>
+    <string name="route_in_maps_anzeigen">Route in Maps anzeigen</string>
+    <string name="e_mail_adresse">E-Mail-Adresse:</string>
+    <string name="telefonnummer">Telefonnummer:</string>
+    <string name="e_mail_darf_leer_bleiben">E-Mail: Darf leer bleiben</string>
+    <string name="telefonnummer_darf_leer_bleiben">Telefonnummer: Darf leer bleiben</string>
 </resources>

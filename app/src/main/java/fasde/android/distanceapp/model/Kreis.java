@@ -28,9 +28,9 @@ public enum Kreis {
      * @param kreisName
      * @return Kreis
      */
-    public static Kreis getForName(String kreisName){
-        for(Kreis kreis : Kreis.values()){
-            if(kreis.getName().equals(kreisName)){
+    public static Kreis getForName(String kreisName) {
+        for (Kreis kreis : Kreis.values()) {
+            if (kreis.getName().equals(kreisName)) {
                 return kreis;
             }
         }

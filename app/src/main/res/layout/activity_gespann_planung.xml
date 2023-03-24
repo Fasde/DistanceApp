@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:backgroundTint="#E6FFFFFF"
+    android:backgroundTintMode="src_over"
+    tools:context="fasde.android.distanceapp.view.ListViewActivity">
+
+    <TextView
+        android:id="@+id/startadresse_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/startadresse"/>
+
+    <Spinner
+        android:id="@+id/startadresse"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startadresse_header"
+        style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+    <TextView
+        android:id="@+id/sra1_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/erster_assistent"
+        android:layout_below="@+id/startadresse"/>
+
+    <Spinner
+        android:id="@+id/sra_spinner"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sra1_header"
+        style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+    <TextView
+        android:id="@+id/sra2_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/zweiter_assistent"
+        android:layout_below="@+id/sra_spinner"/>
+
+    <Spinner
+        android:id="@+id/sra2_spinner"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sra2_header"
+        style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+    <TextView
+        android:id="@+id/zielort_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/zielort"
+        android:layout_below="@+id/sra2_spinner"/>
+
+    <Spinner
+        android:id="@+id/zielort_spinner"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/zielort_header"
+        style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toMapsRoute"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:text="@string/route_in_maps_anzeigen"
+        android:layout_above="@+id/listAdView"
+        />
+
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listAdView"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/ad_pub_id"
+        />
+</RelativeLayout>

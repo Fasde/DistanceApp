@@ -1,5 +1,7 @@
 package fasde.android.distanceapp.database;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -14,6 +16,11 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class SaveData {
+
+    public Map<String, String> getRefs(Context context) {
+        SharedPreferences refPrefs = context.getSharedPreferences("REFEREES", 0);
+        return (Map<String, String>) refPrefs.getAll();
+    }
 
     public Map<String, Spielort> fillVereine(String variante) {
         HashMap<String, Spielort> vereine = new HashMap<>();
@@ -47,15 +54,15 @@ public class SaveData {
                 addSpielorte(vereine, SaveData.jadeWeserHunte());
                 break;
             default:
-               Log.println(Log.ERROR, "Fehler", "Kein Kreis gewählt!");
-               break;
+                Log.println(Log.ERROR, "Fehler", "Kein Kreis gewählt!");
+                break;
         }
 
         return vereine;
     }
 
-    private void addSpielorte(Map<String, Spielort> vereine, List<Spielort> list){
-        for(Spielort ort : list){
+    private void addSpielorte(Map<String, Spielort> vereine, List<Spielort> list) {
+        for (Spielort ort : list) {
             vereine.put(ort.getOrtsName(), ort);
         }
     }
@@ -195,7 +202,6 @@ public class SaveData {
         emsland.add(new Spielort("Wettrup", Kreis.EL, "49838 Wettrup, Luisenweg 10", "7.606216898086005,52.583822919137134"));
         return emsland;
     }
-
 
 
     private List<Spielort> grafschaft() {

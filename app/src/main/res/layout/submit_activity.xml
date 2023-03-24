@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:backgroundTint="#E6FFFFFF"
+    android:backgroundTintMode="src_over"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/refNameSubmit"
+        android:autofillHints=""
+        android:inputType="textCapSentences"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/vorname_nachname"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/refOrtSubmit"
+        android:autofillHints=""
+        android:inputType="textCapSentences"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/refNameSubmit"
+        android:layout_marginHorizontal="15dp"
+        android:hint="@string/plz_ort"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/refStrasseSubmit"
+        android:layout_below="@id/refOrtSubmit"
+        android:autofillHints=""
+        android:layout_marginTop="20dp"
+        android:inputType="textCapSentences"
+        android:layout_marginHorizontal="15dp"
+        android:hint="@string/strasse"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/refEmailSubmit"
+        android:layout_below="@id/refStrasseSubmit"
+        android:autofillHints=""
+        android:layout_marginTop="20dp"
+        android:inputType="textEmailAddress"
+        android:layout_marginHorizontal="15dp"
+        android:hint="@string/e_mail_darf_leer_bleiben"/>
+
+
+    <EditText
+        android:id="@+id/refTelnrSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/refEmailSubmit"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:hint="@string/telefonnummer_darf_leer_bleiben"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:text="@string/abschicken" />
+
+
+</RelativeLayout>

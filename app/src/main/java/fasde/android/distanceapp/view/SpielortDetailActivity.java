@@ -95,7 +95,7 @@ public class SpielortDetailActivity extends AppCompatActivity {
 
         Button mapsButton = findViewById(R.id.toMaps);
         mapsButton.setOnClickListener(view -> {
-            Uri mapsIntentUri = Uri.parse("geo:0,0?q="+ortString+","+strasseString);
+            Uri mapsIntentUri = Uri.parse("geo:0,0?q=" + ortString + "," + strasseString);
             Intent mapsIntent = new Intent(Intent.ACTION_VIEW, mapsIntentUri);
             mapsIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapsIntent);
@@ -103,20 +103,22 @@ public class SpielortDetailActivity extends AppCompatActivity {
     }
 
     private void request() {
-        String url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248b2d893fc69e7408c85550ae302e3b97d&start="+Geo.loadPersistedHome(getApplicationContext())+"&end="+Geo.destCords;
+        String url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248b2d893fc69e7408c85550ae302e3b97d&start=" + Geo.loadPersistedHome(getApplicationContext()) + "&end=" + Geo.destCords;
         JsonObjectRequest req2 = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
-           try{
-               JSONObject object = response.getJSONArray("features").getJSONObject(0).getJSONObject("properties").getJSONObject("summary");
-               setTexts(object.get("duration").toString(), object.get("distance").toString());
-           } catch (Exception e){
-               e.printStackTrace();
-           }
-        }, error -> {Toast.makeText(this, "Fehler", Toast.LENGTH_LONG).show();
-            System.out.println(Arrays.toString(error.getStackTrace()));});
+            try {
+                JSONObject object = response.getJSONArray("features").getJSONObject(0).getJSONObject("properties").getJSONObject("summary");
+                setTexts(object.get("duration").toString(), object.get("distance").toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, error -> {
+            Toast.makeText(this, "Fehler", Toast.LENGTH_LONG).show();
+            System.out.println(Arrays.toString(error.getStackTrace()));
+        });
         queue.add(req2);
     }
 
-    private void setTexts(String duration, String distance){
+    private void setTexts(String duration, String distance) {
         TextView distanzView = findViewById(R.id.detail_km);
         TextView kostenView = findViewById(R.id.detail_kosten);
         TextView dauerView = findViewById(R.id.detail_duration);
@@ -125,7 +127,7 @@ public class SpielortDetailActivity extends AppCompatActivity {
         int i = (int) d;
         String distanzString = i + "km pro Strecke";
         distanzView.setText(distanzString);
-        String durString = ((int)(Double.parseDouble(duration)/60d)) + " Minuten";
+        String durString = ((int) (Double.parseDouble(duration) / 60d)) + " Minuten";
         dauerView.setText(durString);
         BigDecimal bd = BigDecimal.valueOf(i * 0.30 * 2).setScale(2, RoundingMode.HALF_DOWN);
         String kostenString = bd.toString() + "€";
@@ -163,6 +165,24 @@ public class SpielortDetailActivity extends AppCompatActivity {
                 finish();
                 break;
             }
+            case R.id.Referees:
+                Intent ref = new Intent(SpielortDetailActivity.this, RefereeActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(ref);
+                finish();
+                break;
+            case R.id.Kreislist:
+                Intent kreislist = new Intent(this, ListViewActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(kreislist);
+                finish();
+                break;
+            case R.id.Routenplanung:
+                Intent gespann = new Intent(this, GespannPlanungActivity.class);
+                Toolbox.killAllToasts();
+                startActivity(gespann);
+                finish();
+                break;
             case android.R.id.home:
                 finishActivity(0);
                 break;

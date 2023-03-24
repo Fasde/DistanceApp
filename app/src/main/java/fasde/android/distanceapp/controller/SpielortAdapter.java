@@ -19,26 +19,23 @@ import org.jetbrains.annotations.TestOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-import fasde.android.distanceapp.model.Spielort;
 import fasde.android.distanceapp.R;
+import fasde.android.distanceapp.model.Spielort;
 
 /**
  * Custom Adapter for a ListView of Spielorts.
  */
 public class SpielortAdapter extends ArrayAdapter<Spielort> {
 
-    private Context context;
+    private final Context context;
     private List<Spielort> spielortList;
-    private List<Spielort> allDataList;
+    private final List<Spielort> allDataList;
     private SpielortFilter filter;
 
     /**
      * Constructor for SpielortAdapter, that creates an instance of this class while giving a
      * context and an ArrayList<Spielort>, that is used to initalize two beforehandly declared
      * Lists.
-     *
-     * @param context
-     * @param spielortList
      */
     public SpielortAdapter(@NonNull Context context, @SuppressLint("SupportAnnotationUsage") @LayoutRes List<Spielort> spielortList) {
         super(context, 0, spielortList);
@@ -64,16 +61,13 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
      * @return the spielortList
      */
     @TestOnly
-    public List<Spielort> getSpielortList(){
+    public List<Spielort> getSpielortList() {
         return this.spielortList;
     }
 
     /**
      * Returns an View-element which is used in the ListView. This element contains a Spielort.
      *
-     * @param position
-     * @param convertView
-     * @param parent
      * @return View
      */
     @SuppressLint("SetTextI18n")
@@ -120,11 +114,10 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
      * The list used is not the complete list of all items, it is the list where possible searches
      * are already executed.
      *
-     * @param position
      * @return Spielort at given position
      */
     @Override
-    public Spielort getItem(int position){
+    public Spielort getItem(int position) {
         return spielortList.get(position);
     }
 
@@ -134,7 +127,6 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
          * Filters the Spielorts in the spielortList. Every Spielort, which name contains the
          * constraint, is returned.
          *
-         * @param constraint
          * @return FilterResults
          */
         @Override
@@ -155,9 +147,6 @@ public class SpielortAdapter extends ArrayAdapter<Spielort> {
 
         /**
          * Publishes the results of the filtering to the listView.
-         *
-         * @param constraint
-         * @param results
          */
         @SuppressWarnings("unchecked")
         @Override
