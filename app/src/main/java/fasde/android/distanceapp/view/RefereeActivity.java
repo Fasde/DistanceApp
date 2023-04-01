@@ -62,7 +62,20 @@ public class RefereeActivity extends AppCompatActivity {
         Map<String, String> refs = new TreeMap<>(SaveData.getRefs(getApplicationContext()));
 
         for (Map.Entry<String, String> entry : refs.entrySet()) {
-            Referee ref = new Referee(entry.getKey(), entry.getValue().split("#")[0] + ',' + entry.getValue().split("#")[1], entry.getValue().split("#")[2], entry.getValue().split("#")[3]);
+            String adresse = entry.getValue().split("#")[0] + ',' + entry.getValue().split("#")[1];
+            String email;
+            String tel;
+            try{
+                email = entry.getValue().split("#")[2];
+            } catch (Exception e) {
+                email = " ";
+            }
+            try{
+                tel = entry.getValue().split("#")[3];
+            } catch (Exception e) {
+                tel = " ";
+            }
+            Referee ref = new Referee(entry.getKey(), adresse, email, tel);
             referees.add(ref);
         }
 

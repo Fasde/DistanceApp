@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fasde.android.distanceapp.R;
@@ -36,7 +37,22 @@ public class RefSubmitActivity extends AppCompatActivity {
         EditText tel = findViewById(R.id.refTelnrSubmit);
         SharedPreferences refPres = getApplicationContext().getSharedPreferences("REFEREES", 0);
         SharedPreferences.Editor editor = refPres.edit();
-        editor.putString(name.getText().toString(), ort.getText() + "#" + strasse.getText()+ "#" + email.getText() + "#" + tel.getText());
+        if(name.getText().toString().equals("") || name.getText().toString().equals("") || name.getText().toString().equals(""))
+        {
+            new AlertDialog.Builder(this)
+                    .setTitle("Nicht alle Daten")
+                    .setMessage("Es wurden nicht alle erforderlichen Daten geliefert.")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+        }
+        if(email.getText().toString().equals("")){
+            email.setText(" ");
+        }
+        if(tel.getText().toString().equals("")){
+            tel.setText(" ");
+        }
+        editor.putString(name.getText().toString().trim(), ort.getText().toString().trim() + "#" + strasse.getText().toString().trim() + "#" + email.getText().toString().trim() + "#" + tel.getText().toString().trim());
         editor.apply();
         Intent ref = new Intent(RefSubmitActivity.this, RefereeActivity.class);
         ref.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

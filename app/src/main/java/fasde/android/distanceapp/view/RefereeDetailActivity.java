@@ -74,8 +74,8 @@ public class RefereeDetailActivity extends AppCompatActivity {
         spielortView.setText(nameString);
         ortView.setText(ortString);
         strasseView.setText(strasseString);
-        emailView.setText(emailString);
-        telnrView.setText(telnrString);
+        emailView.setText(emailString.trim());
+        telnrView.setText(telnrString.trim());
 
         telnrView.setOnClickListener(view -> {
             Intent dial = new Intent(Intent.ACTION_DIAL);

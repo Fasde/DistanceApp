@@ -78,8 +78,11 @@ public class GespannPlanungActivity extends AppCompatActivity {
         String adr_sra2;
         Spielort adr_ziel;
         adr_refStart = Objects.requireNonNull(refMap.get(startadresse.getSelectedItem().toString())).replace("#", ", ");
-        adr_sra1 = Objects.requireNonNull(refMap.get(sra1.getSelectedItem().toString())).replace("#", ", ");
-        adr_sra2 = Objects.requireNonNull(refMap.get(sra2.getSelectedItem().toString())).replace("#", ", ");
+        adr_sra1 = Objects.requireNonNull(refMap.get(sra1.getSelectedItem().toString()));
+        adr_sra1 = adr_sra1.substring(0, adr_sra1.lastIndexOf("#")).replace("#", ", ");
+
+        adr_sra2 = Objects.requireNonNull(refMap.get(sra2.getSelectedItem().toString()));
+        adr_sra2 = adr_sra2.substring(0, adr_sra2.lastIndexOf("#")).replace("#", ", ");
         adr_ziel = ortMap.get(zielort.getSelectedItem().toString());
         Uri mapsIntentUri = Uri.parse("https://www.google.com/maps/dir/" +
                 adr_refStart + '/' +

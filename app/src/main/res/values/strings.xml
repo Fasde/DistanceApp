@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">DistanceApp</string>
-    <string name="display_name">Spielort-Distanz</string>
-    <string name="version">2.6.0 Cockroach</string>
+    <string name="app_name">RefereeAppWeserEms</string>
+    <string name="display_name">Schiri-Helfer</string>
+    <string name="version">2.6.1 Cockroach</string>
     <string name="edit_text_hint">Suche nach Spielort oder Adresse</string>
     <string name="impressum">Impressum</string>
     <string name="detailHeader">Zweck und Inhalt:</string>
